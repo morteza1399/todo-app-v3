@@ -103,7 +103,10 @@
                 >Complete</span
               >
             </td>
-            <td class="py-4 mr-6 hover:text-white-100 cursor-pointer">
+            <td
+              class="py-4 mr-6 hover:text-white-100 cursor-pointer"
+              @click="clearCompleted"
+            >
               Clear Completed
             </td>
           </tr>
@@ -167,21 +170,27 @@ export default {
     },
     filterTasks(property) {
       if (property === "all") {
-        this.tasks = this.$store.getters.get_tasks
+        this.tasks = this.$store.getters.get_tasks;
       } else {
-        this.tasks = this.$store.getters.get_tasks
+        this.tasks = this.$store.getters.get_tasks;
         let filterdTasks = this.tasks.filter((item) => {
           return item.status === property;
         });
         this.tasks = filterdTasks;
       }
     },
+    clearCompleted() {
+      let notCompletedTasks = this.tasks.filter((item) => {
+        return item.status != "completed";
+      });
+      this.tasks = notCompletedTasks
+    },
   },
   created() {
     this.$store
       .dispatch("getTasks")
       .then(() => {
-        this.tasks = this.$store.getters.get_tasks
+        this.tasks = this.$store.getters.get_tasks;
       })
       .catch((err) => {
         console.log(err, "err");
