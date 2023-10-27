@@ -11,3 +11,7 @@
 .todo-app {
   background: url("./assets/images/bg-desktop-dark.jpg") no-repeat, hsl(235, 21%, 11%);
 }
+
+tr:hover td > img {
+  display: flex;
+}

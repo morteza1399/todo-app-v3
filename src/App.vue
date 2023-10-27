@@ -31,8 +31,8 @@
         <tbody>
           <tr
             class="flex justify-between items-center border-solid border-b-2 border-gray-700 cursor-pointer"
-            v-for="(item, index) in tasks"
-            :key="index"
+            v-for="item in tasks"
+            :key="item.id"
           >
             <td class="flex justify-center items-center p-4">
               <div
@@ -61,50 +61,56 @@
               </div>
               <span
                 :class="[
-                  'ml-4',
-                  { 'line-through text-gray-200': item.status === 'completed' },
+                  'xl:ml-4 lg:ml-4 md:ml-4 xl:text-xl lg:text-lg md:text-base sm:text-sm xs:text-xs xxs:text-xs',
+                  {
+                    'ml-2 line-through text-gray-200':
+                      item.status === 'completed',
+                  },
                 ]"
-                @click="changeStatus(index)"
+                @click="changeStatus(item)"
               >
-                {{ item.name }} =========== {{ item.status }}
+                {{ item.name }}
               </span>
             </td>
             <td class="flex justify-center items-center p-4">
               <img
-                class="hidden"
+                class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex"
                 src="./assets/images/icon-cross.svg"
                 alt=""
-                @click="removeTask(index)"
+                @click="removeTask(item.id)"
               />
             </td>
           </tr>
         </tbody>
         <tfoot class="text-sm text-gray-100">
           <tr class="flex justify-between">
-            <td class="py-4 ml-6 hover:text-white">
+            <td class="py-4 ml-6 hover:text-white font-bold">
               {{ tasks.length }} items left
             </td>
             <td
               class="py-4 xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden"
             >
-              <span
-                class="px-2 hover:text-white-100 cursor-pointer"
+              <a
+                href="#"
+                class="px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold"
                 @click="filterTasks('all')"
-                >All</span
+                >All</a
               >
-              <span
-                class="px-2 hover:text-white-100 cursor-pointer"
+              <a
+                href="#"
+                class="px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold"
                 @click="filterTasks('active')"
-                >Active</span
+                >Active</a
               >
-              <span
-                class="px-2 hover:text-white-100 cursor-pointer"
+              <a
+                href="#"
+                class="px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold"
                 @click="filterTasks('completed')"
-                >Complete</span
+                >Complete</a
               >
             </td>
             <td
-              class="py-4 mr-6 hover:text-white-100 cursor-pointer"
+              class="py-4 mr-6 hover:text-white-100 cursor-pointer font-bold"
               @click="clearCompleted"
             >
               Clear Completed
@@ -116,20 +122,23 @@
     <div
       class="flex justify-center items-center font-josefin bg-dark-100 text-gray-100 rounded py-4 my-2 mx-auto xl:w-1/3 lg:w-2/3 md:w-2/3 sm:w-10/12 xs:w-10/12 xxs:w-11/12 xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex"
     >
-      <span
-        class="px-2 hover:text-white-100 cursor-pointer"
+      <a
+        href="#"
+        class="px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold"
         @click="filterTasks('all')"
-        >All</span
+        >All</a
       >
-      <span
-        class="px-2 hover:text-white-100 cursor-pointer"
+      <a
+        href="#"
+        class="px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold"
         @click="filterTasks('active')"
-        >Active</span
+        >Active</a
       >
-      <span
-        class="px-2 hover:text-white-100 cursor-pointer"
+      <a
+        href="#"
+        class="px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold"
         @click="filterTasks('completed')"
-        >Complete</span
+        >Complete</a
       >
     </div>
     <div
@@ -154,19 +163,51 @@ export default {
   },
   methods: {
     addedTask() {
-      this.tasks.push({
-        name: this.task,
-        status: "to-do",
-      });
-      this.task = "";
+      this.$store
+        .dispatch("postTasks", {
+          name: this.task,
+          status: "to-do",
+        })
+        .then((res) => {
+          this.tasks.push(res);
+          this.task = "";
+        })
+        .catch((err) => {
+          console.log(err, "err");
+        });
     },
-    removeTask(index) {
-      this.tasks.splice(index, 1);
+    removeTask(id) {
+      this.$store
+        .dispatch("deleteTasks", id)
+        .then(() => {
+          this.$store
+            .dispatch("getTasks")
+            .then((res) => {
+              this.tasks = res;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    changeStatus(index) {
-      let newIndex = this.availableStatus.indexOf(this.tasks[index].status);
+    changeStatus(item) {
+      let newIndex = this.availableStatus.indexOf(item.status);
       if (++newIndex > 2) newIndex = 0;
-      this.tasks[index].status = this.availableStatus[newIndex];
+      item.status = this.availableStatus[newIndex];
+      this.$store.dispatch("updateTasks", {
+        id: item.id,
+        updatedTask: item,
+      });
+    },
+    clearCompleted() {
+      for (const item of this.tasks) {
+        if (item.status == "completed") {
+          this.removeTask(item.id);
+        }
+      }
     },
     filterTasks(property) {
       if (property === "all") {
@@ -178,12 +219,6 @@ export default {
         });
         this.tasks = filterdTasks;
       }
-    },
-    clearCompleted() {
-      let notCompletedTasks = this.tasks.filter((item) => {
-        return item.status != "completed";
-      });
-      this.tasks = notCompletedTasks
     },
   },
   created() {

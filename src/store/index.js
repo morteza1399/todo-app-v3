@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 const state = {
   tasks: [],
+  baseUrl: "http://localhost:3000",
 };
 
 const getters = {
@@ -21,13 +22,54 @@ const mutations = {
 
 const actions = {
   async getTasks(context) {
-    let response = await fetch("http://localhost:3000/tasks");
+    let response = await fetch(`${context.state.baseUrl}/tasks`);
     let data = await response.json();
     if (response.status == 200) {
-      context.commit('SET_TASKS', data)
-      return Promise.resolve(data)
+      context.commit("SET_TASKS", data);
+      return Promise.resolve(data);
     } else {
-      return Promise.reject(data)
+      return Promise.reject(data);
+    }
+  },
+  async postTasks(context, tasks) {
+    let response = await fetch(`${context.state.baseUrl}/tasks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(tasks),
+    });
+    let data = await response.json();
+    if (response.status == 201) {
+      return Promise.resolve(data);
+    } else {
+      return Promise.reject(data);
+    }
+  },
+  async updateTasks(context, { id, updatedTask }) {
+    let response = await fetch(`${context.state.baseUrl}/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(updatedTask),
+    });
+    let data = await response.json();
+    if (response.status == 200) {
+      return Promise.resolve(data);
+    } else {
+      return Promise.reject(data);
+    }
+  },
+  async deleteTasks(context, id) {
+    let response = await fetch(`${context.state.baseUrl}/tasks/${id}`, {
+      method: "DELETE",
+    });
+    let data = await response.json();
+    if (response.status == 200) {
+      return Promise.resolve(data);
+    } else {
+      return Promise.reject(data);
     }
   },
 };

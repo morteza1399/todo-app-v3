@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "name": "new task 1",
+      "status": "to-do",
+      "id": 1
+    },
+    {
+      "name": "new task 2",
+      "status": "active",
+      "id": 2
+    }
+  ]
+}
