@@ -11,71 +11,73 @@
     >
       <table class="w-full h-auto table-auto">
         <tbody>
-          <tr
-            :class="[
-              'flex justify-between items-center',
-              {
-                'create-border-bottom border-gray-300': darkMode,
-                'border-solid border-b cursor-pointer border-white-200':
-                  !darkMode,
-              },
-            ]"
-            v-for="item in todoItems"
-            :key="item.id"
-          >
-            <td class="flex-centered p-4">
-              <div
-                :class="{
-                  'flex-centered h-6 w-6 mr-2 create-border rounded-3xl hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none':
-                    item.status != 'completed',
-                  'border-gray-300': darkMode,
-                  'border-white-200': !darkMode,
-                  'flex-centered h-6 w-6 bg-gradient-to-br rounded-3xl from-blue-100 to-purple':
-                    item.status === 'completed',
-                }"
-              >
+          <div is="draggable" :list="todoItems" tag="div">
+            <tr
+              :class="[
+                'flex justify-between items-center',
+                {
+                  'create-border-bottom border-gray-300': darkMode,
+                  'border-solid border-b cursor-pointer border-white-200':
+                    !darkMode,
+                },
+              ]"
+              v-for="item in todoItems"
+              :key="item.id"
+            >
+              <td class="flex-centered p-4">
                 <div
                   :class="{
-                    'flex-centered h-5 w-5 rounded-3xl':
+                    'flex-centered h-6 w-6 mr-2 create-border rounded-3xl hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none':
                       item.status != 'completed',
-                    'bg-dark-100': darkMode,
-                    'bg-white-400': !darkMode,
-                    hidden: item.status === 'completed',
+                    'border-gray-300': darkMode,
+                    'border-white-200': !darkMode,
+                    'flex-centered h-6 w-6 bg-gradient-to-br rounded-3xl from-blue-100 to-purple':
+                      item.status === 'completed',
                   }"
-                ></div>
+                >
+                  <div
+                    :class="{
+                      'flex-centered h-5 w-5 rounded-3xl':
+                        item.status != 'completed',
+                      'bg-dark-100': darkMode,
+                      'bg-white-400': !darkMode,
+                      hidden: item.status === 'completed',
+                    }"
+                  ></div>
+                  <img
+                    :class="{
+                      hidden: item.status != 'completed',
+                      flex: item.status == 'completed',
+                    }"
+                    src="../assets/images/icon-check.svg"
+                    alt=""
+                  />
+                </div>
+                <span
+                  :class="[
+                    'select-none xl:ml-4 lg:ml-4 md:ml-4 xl:text-xl lg:text-lg md:text-base sm:text-sm xs:text-xs xxs:text-xs',
+                    {
+                      'line-through text-gray-200':
+                        item.status === 'completed' && darkMode,
+                      'line-through text-white-200':
+                        item.status === 'completed' && !darkMode,
+                    },
+                  ]"
+                  @click="updateTodoItem(item)"
+                >
+                  {{ item.name }}
+                </span>
+              </td>
+              <td class="flex-centered p-4">
                 <img
-                  :class="{
-                    hidden: item.status != 'completed',
-                    flex: item.status == 'completed',
-                  }"
-                  src="../assets/images/icon-check.svg"
+                  class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex"
+                  src="../assets/images/icon-cross.svg"
                   alt=""
+                  @click="removeTodoItem(item)"
                 />
-              </div>
-              <span
-                :class="[
-                  'xl:ml-4 lg:ml-4 md:ml-4 xl:text-xl lg:text-lg md:text-base sm:text-sm xs:text-xs xxs:text-xs',
-                  {
-                    'line-through text-gray-200':
-                      item.status === 'completed' && darkMode,
-                    'line-through text-white-200':
-                      item.status === 'completed' && !darkMode,
-                  },
-                ]"
-                @click="updateTodoItem(item)"
-              >
-                {{ item.name }}
-              </span>
-            </td>
-            <td class="flex-centered p-4">
-              <img
-                class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex"
-                src="../assets/images/icon-cross.svg"
-                alt=""
-                @click="removeTodoItem(item)"
-              />
-            </td>
-          </tr>
+              </td>
+            </tr>
+          </div>
           <tr
             v-if="hasTasks"
             :class="[
@@ -153,7 +155,10 @@
     <div
       :class="[
         'flex-centered font-josefin rounded py-4 my-3 responsive-width xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex',
-        { 'bg-dark-100 text-gray-100': darkMode, 'bg-white-400 text-gray-400': !darkMode },
+        {
+          'bg-dark-100 text-gray-100': darkMode,
+          'bg-white-400 text-gray-400': !darkMode,
+        },
       ]"
     >
       <a
@@ -188,8 +193,12 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
 export default {
   name: "AppTable",
+  components: {
+    draggable,
+  },
   props: {
     todoItems: {
       type: Array,
