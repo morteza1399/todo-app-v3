@@ -2,16 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .flex-centered {
+    @apply flex justify-center items-center;
+  }
+
+  .filter-link {
+    @apply px-2 hover:text-white-100 focus:text-blue cursor-pointer font-bold;
+  }
+
+  .create-border-bottom {
+    @apply border-solid border-b-2 border-gray-300 cursor-pointer;
+  }
+
+  .create-border {
+    @apply border-solid border-2 border-gray-300
+  }
+
+  .responsive-width {
+    @apply mx-auto xl:w-1/3 lg:w-2/3 md:w-2/3 sm:w-10/12 xs:w-10/12 xxs:w-11/12;
+  }
+}
+
 @font-face {
   font-family: "Josefin";
-  src: url('./assets/fonts/static/JosefinSans-Medium.ttf') format('ttf')
-  url('./assets/fonts/static/JosefinSans-Bold.ttf') format('ttf');
+  src: url('./assets/fonts/static/JosefinSans-Medium.ttf') format('ttf') url('./assets/fonts/static/JosefinSans-Bold.ttf') format('ttf');
 }
 
 .todo-app {
   background: url("./assets/images/bg-desktop-dark.jpg") no-repeat, hsl(235, 21%, 11%);
 }
 
-tr:hover td > img {
+tr:hover td>img {
   display: flex;
+}
+
+@media screen and (max-width: 375px) {
+  .todo-app {
+    background: url('./assets/images/bg-mobile-dark.jpg') no-repeat, hsl(235, 21%, 11%);
+  }
 }
