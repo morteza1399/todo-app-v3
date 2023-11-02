@@ -1,11 +1,11 @@
 <template>
   <div
     :class="[
-      'min-h-screen pt-[0.45rem]',
+      'min-h-screen',
       { 'todo-app-dark': isDark, 'todo-app-light': !isDark },
     ]"
   >
-    <div class="flex justify-between pt-24 responsive-width">
+    <div class="flex justify-between items-center pt-24 responsive-width">
       <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">
         TODO
       </h1>
@@ -16,19 +16,22 @@
     </div>
     <div
       :class="[
-        'font-josefin text-lg my-6 responsive-width',
-        { 'text-gray-100': isDark, 'text-dark-100': !isDark },
+        'flex items-center font-josefin responsive-width my-6 h-14 rounded',
+        {
+          'bg-dark-100 text-gray-100': isDark,
+          'bg-white-400 text-dark-100': !isDark,
+        },
       ]"
     >
       <div
         :class="[
-          'absolute h-6 w-6 create-border rounded-3xl translate-y-5 translate-x-3',
+          'h-6 w-6 create-border rounded-[100%] ml-4',
           { 'border-gray-300': isDark, 'border-white-200': !isDark },
         ]"
       ></div>
       <input
         :class="[
-          'w-full pl-16 pt-4 pr-4 pb-4 rounded focus:outline-none',
+          'w-full h-full rounded ml-2 focus:outline-none font-size',
           { 'bg-dark-100': isDark, 'bg-white-400': !isDark },
         ]"
         type="text"

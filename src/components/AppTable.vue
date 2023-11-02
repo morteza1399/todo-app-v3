@@ -27,17 +27,17 @@
               <td class="flex-centered p-4">
                 <div
                   :class="{
-                    'flex-centered h-6 w-6 mr-2 create-border rounded-3xl hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none':
+                    'flex-centered h-6 w-6 mr-2 create-border rounded-[100%] hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none':
                       item.status != 'completed',
                     'border-gray-300': darkMode,
                     'border-white-200': !darkMode,
-                    'flex-centered h-6 w-6 bg-gradient-to-br rounded-3xl from-blue-100 to-purple':
+                    'flex-centered h-6 w-6 bg-gradient-to-br rounded-[100%] from-blue-100 to-purple':
                       item.status === 'completed',
                   }"
                 >
                   <div
                     :class="{
-                      'flex-centered h-5 w-5 rounded-3xl':
+                      'flex-centered h-5 w-5 rounded-[100%]':
                         item.status != 'completed',
                       'bg-dark-100': darkMode,
                       'bg-white-400': !darkMode,
@@ -55,11 +55,11 @@
                 </div>
                 <span
                   :class="[
-                    'select-none xl:ml-4 lg:ml-4 md:ml-4 xl:text-xl lg:text-lg md:text-base sm:text-sm xs:text-xs xxs:text-xs',
+                    'select-none font-size',
                     {
-                      'line-through text-gray-200':
+                      'ml-2 line-through text-gray-200':
                         item.status === 'completed' && darkMode,
-                      'line-through text-white-200':
+                      'ml-2 line-through text-white-200':
                         item.status === 'completed' && !darkMode,
                     },
                   ]"
