@@ -1,22 +1,36 @@
 <template>
-  <div class="todo-app min-h-screen pt-[0.45rem]">
-    <div
-      class="flex justify-between pt-24 responsive-width"
-    >
+  <div
+    :class="[
+      'min-h-screen pt-[0.45rem]',
+      { 'todo-app-dark': isDark, 'todo-app-light': !isDark },
+    ]"
+  >
+    <div class="flex justify-between pt-24 responsive-width">
       <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">
         TODO
       </h1>
-      <img src="./assets/images/icon-sun.svg" alt="" />
+      <button class="flex focus:outline-none" @click="isDark = !isDark">
+        <img v-if="isDark" src="./assets/images/icon-sun.svg" alt="" />
+        <img v-else src="./assets/images/icon-moon.svg" alt="" />
+      </button>
     </div>
-
     <div
-      class="font-josefin text-gray-100 text-lg my-6 responsive-width"
+      :class="[
+        'font-josefin text-lg my-6 responsive-width',
+        { 'text-gray-100': isDark, 'text-dark-100': !isDark },
+      ]"
     >
       <div
-        class="h-6 w-6 create-border rounded-3xl translate-y-5 translate-x-3 absolute"
+        :class="[
+          'absolute h-6 w-6 create-border rounded-3xl translate-y-5 translate-x-3',
+          { 'border-gray-300': isDark, 'border-white-200': !isDark },
+        ]"
       ></div>
       <input
-        class="w-full pl-16 pt-4 pr-4 pb-4 rounded bg-dark-100 focus:outline-none"
+        :class="[
+          'w-full pl-16 pt-4 pr-4 pb-4 rounded focus:outline-none',
+          { 'bg-dark-100': isDark, 'bg-white-400': !isDark },
+        ]"
         type="text"
         name=""
         id=""
@@ -27,6 +41,7 @@
     </div>
     <AppTable
       :todo-items="tasks"
+      :dark-mode="isDark"
       @remove-item="removeTask"
       @update-item="updateTask"
       @filter-item="filterTask"
@@ -52,6 +67,7 @@ export default {
       tasks: [],
       task: "",
       availableStatus: ["to-do", "active", "completed"],
+      isDark: true,
     };
   },
   components: {

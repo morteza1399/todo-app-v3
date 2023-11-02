@@ -1,28 +1,45 @@
 <template>
   <div>
     <div
-      class="font-josefin h-auto bg-dark-100 text-white-100 rounded text-lg shadow-2xl responsive-width"
+      :class="[
+        'font-josefin h-auto rounded text-lg shadow-lg responsive-width',
+        {
+          'bg-dark-100 text-white-100': darkMode,
+          'bg-white-400 text-blue-300': !darkMode,
+        },
+      ]"
     >
       <table class="w-full h-auto table-auto">
         <tbody>
           <tr
-            class="flex justify-between items-center create-border-bottom"
+            :class="[
+              'flex justify-between items-center',
+              {
+                'create-border-bottom border-gray-300': darkMode,
+                'border-solid border-b cursor-pointer border-white-200':
+                  !darkMode,
+              },
+            ]"
             v-for="item in todoItems"
             :key="item.id"
           >
             <td class="flex-centered p-4">
               <div
                 :class="{
-                  'flex-centered h-6 w-6 mr-2 create-border rounded-3xl hover:bg-gradient-to-br from-blue to-purple hover:border-none':
+                  'flex-centered h-6 w-6 mr-2 create-border rounded-3xl hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none':
                     item.status != 'completed',
-                  'flex-centered h-6 w-6 bg-gradient-to-br rounded-3xl from-blue to-purple':
+                  'border-gray-300': darkMode,
+                  'border-white-200': !darkMode,
+                  'flex-centered h-6 w-6 bg-gradient-to-br rounded-3xl from-blue-100 to-purple':
                     item.status === 'completed',
                 }"
               >
                 <div
                   :class="{
-                    'flex-centered h-5 w-5 bg-dark-100 rounded-3xl':
+                    'flex-centered h-5 w-5 rounded-3xl':
                       item.status != 'completed',
+                    'bg-dark-100': darkMode,
+                    'bg-white-400': !darkMode,
                     hidden: item.status === 'completed',
                   }"
                 ></div>
@@ -39,8 +56,10 @@
                 :class="[
                   'xl:ml-4 lg:ml-4 md:ml-4 xl:text-xl lg:text-lg md:text-base sm:text-sm xs:text-xs xxs:text-xs',
                   {
-                    'ml-2 line-through text-gray-200':
-                      item.status === 'completed',
+                    'line-through text-gray-200':
+                      item.status === 'completed' && darkMode,
+                    'line-through text-white-200':
+                      item.status === 'completed' && !darkMode,
                   },
                 ]"
                 @click="updateTodoItem(item)"
@@ -57,33 +76,72 @@
               />
             </td>
           </tr>
-          <tr v-if="hasTasks" class="flex-centered create-border-bottom">
+          <tr
+            v-if="hasTasks"
+            :class="[
+              'flex-centered create-border-bottom',
+              {
+                'border-gray-300': darkMode,
+                'border-solid border-b cursor-pointer border-white-200':
+                  !darkMode,
+              },
+            ]"
+          >
             <td class="flex-centered p-4">NO TASKS</td>
           </tr>
         </tbody>
-        <tfoot class="text-sm text-gray-100">
+        <tfoot :class="['text-sm', { 'text-gray-100': darkMode }]">
           <tr class="flex justify-between">
-            <td class="py-4 ml-6 hover:text-white font-bold">
+            <td
+              :class="[
+                'py-4 ml-6 font-bold',
+                {
+                  'hover:text-white-100': darkMode,
+                  'text-gray-400 hover:text-blue-300': !darkMode,
+                },
+              ]"
+            >
               {{ todoItems.length }} items left
             </td>
             <td
               class="py-4 xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden"
             >
-              <a href="#" class="filter-link" @click="filterTodoItem('all')"
+              <a
+                href="#"
+                :class="{
+                  'filter-link': darkMode,
+                  'filter-link-light': !darkMode,
+                }"
+                @click="filterTodoItem('all')"
                 >All</a
               >
-              <a href="#" class="filter-link" @click="filterTodoItem('active')"
+              <a
+                href="#"
+                :class="{
+                  'filter-link': darkMode,
+                  'filter-link-light': !darkMode,
+                }"
+                @click="filterTodoItem('active')"
                 >Active</a
               >
               <a
                 href="#"
-                class="filter-link"
+                :class="{
+                  'filter-link': darkMode,
+                  'filter-link-light': !darkMode,
+                }"
                 @click="filterTodoItem('completed')"
                 >Complete</a
               >
             </td>
             <td
-              class="py-4 mr-6 hover:text-white-100 cursor-pointer font-bold"
+              :class="[
+                'py-4 mr-6 cursor-pointer font-bold',
+                {
+                  'hover:text-white-100': darkMode,
+                  'text-gray-400 hover:text-blue-300': !darkMode,
+                },
+              ]"
               @click="clearCompletedTodoItem"
             >
               Clear Completed
@@ -93,13 +151,36 @@
       </table>
     </div>
     <div
-      class="flex-centered font-josefin bg-dark-100 text-gray-100 rounded py-4 responsive-width xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex"
+      :class="[
+        'flex-centered font-josefin rounded py-4 my-3 responsive-width xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex',
+        { 'bg-dark-100 text-gray-100': darkMode, 'bg-white-400 text-gray-400': !darkMode },
+      ]"
     >
-      <a href="#" class="filter-link" @click="filterTodoItem('all')">All</a>
-      <a href="#" class="filter-link" @click="filterTodoItem('active')"
+      <a
+        href="#"
+        :class="{
+          'filter-link': darkMode,
+          'filter-link-light': !darkMode,
+        }"
+        @click="filterTodoItem('all')"
+        >All</a
+      >
+      <a
+        href="#"
+        :class="{
+          'filter-link': darkMode,
+          'filter-link-light': !darkMode,
+        }"
+        @click="filterTodoItem('active')"
         >Active</a
       >
-      <a href="#" class="filter-link" @click="filterTodoItem('completed')"
+      <a
+        href="#"
+        :class="{
+          'filter-link': darkMode,
+          'filter-link-light': !darkMode,
+        }"
+        @click="filterTodoItem('completed')"
         >Complete</a
       >
     </div>
@@ -112,6 +193,10 @@ export default {
   props: {
     todoItems: {
       type: Array,
+      required: true,
+    },
+    darkMode: {
+      type: Boolean,
       required: true,
     },
   },

@@ -12,8 +12,13 @@
     },
     {
       "name": "new task 3",
-      "status": "active",
+      "status": "to-do",
       "id": 3
+    },
+    {
+      "name": "new task 4",
+      "status": "to-do",
+      "id": 4
     }
   ]
 }
