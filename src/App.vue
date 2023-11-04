@@ -1,39 +1,24 @@
 <template>
   <div
-    :class="[
-      'min-h-screen',
-      { 'todo-app-dark': isDark, 'todo-app-light': !isDark },
-    ]"
+    class="min-h-screen bg-no-repeat xl:dark:bg-desktop-dark lg:dark:bg-desktop-dark md:dark:bg-desktop-dark sm:dark:bg-desktop-dark xs:dark:bg-mobile-dark xxs:dark:bg-mobile-dark dark:bg-dark-200 xl:bg-desktop-light lg:bg-desktop-light md:bg-desktop-light sm:bg-desktop-light xs:bg-mobile-light xxs:bg-mobile-light bg-white-400"
   >
     <div class="flex justify-between items-center pt-24 responsive-width">
       <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">
         TODO
       </h1>
-      <button class="flex focus:outline-none" @click="isDark = !isDark">
+      <button class="flex focus:outline-none" @click="toggleTheme">
         <img v-if="isDark" src="./assets/images/icon-sun.svg" alt="" />
         <img v-else src="./assets/images/icon-moon.svg" alt="" />
       </button>
     </div>
     <div
-      :class="[
-        'flex items-center font-josefin responsive-width my-6 h-14 rounded',
-        {
-          'bg-dark-100 text-gray-100': isDark,
-          'bg-white-400 text-dark-100': !isDark,
-        },
-      ]"
+      class="flex items-center font-josefin responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-dark-100"
     >
       <div
-        :class="[
-          'h-6 w-6 create-border rounded-[100%] ml-4',
-          { 'border-gray-300': isDark, 'border-white-200': !isDark },
-        ]"
+        class="h-6 w-6 create-border rounded-[100%] ml-4 dark:border-gray-300 border-white-200"
       ></div>
       <input
-        :class="[
-          'w-full h-full rounded ml-2 focus:outline-none font-size',
-          { 'bg-dark-100': isDark, 'bg-white-400': !isDark },
-        ]"
+        class="w-full h-full rounded ml-2 focus:outline-none font-size dark:bg-dark-100 bg-white-400"
         type="text"
         name=""
         id=""
@@ -44,7 +29,6 @@
     </div>
     <AppTable
       :todo-items="tasks"
-      :dark-mode="isDark"
       @remove-item="removeTask"
       @update-item="updateTask"
       @filter-item="filterTask"
@@ -134,6 +118,15 @@ export default {
           return item.status === property;
         });
         this.tasks = filterdTasks;
+      }
+    },
+    toggleTheme() {
+      const elem = document.getElementById("html-root");
+      this.isDark = !this.isDark;
+      if (this.isDark) {
+        elem.classList.add("dark");
+      } else {
+        elem.classList.remove("dark");
       }
     },
   },

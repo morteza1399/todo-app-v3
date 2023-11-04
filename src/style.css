@@ -37,24 +37,6 @@
   src: url('./assets/fonts/static/JosefinSans-Medium.ttf') format('ttf') url('./assets/fonts/static/JosefinSans-Bold.ttf') format('ttf');
 }
 
-.todo-app-dark {
-  background: url("./assets/images/bg-desktop-dark.jpg") no-repeat, hsl(235, 21%, 11%);
-}
-
-.todo-app-light {
-  background: url("./assets/images/bg-desktop-light.jpg") no-repeat, hsl(0, 0%, 98%);
-}
-
 tr:hover td>img {
   display: flex;
-}
-
-@media screen and (max-width: 375px) {
-  .todo-app-dark {
-    background: url('./assets/images/bg-mobile-dark.jpg') no-repeat, hsl(235, 21%, 11%);
-  }
-
-  .todo-app-light {
-    background: url('./assets/images/bg-mobile-light.jpg') no-repeat, hsl(236, 33%, 92%);
-  }
 }
