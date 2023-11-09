@@ -11,7 +11,7 @@ npm install
 # serve frontend with hot reload at localhost:5173
 npm run dev
 
-# serve backend with hot reload at localhost:3000
+# serve backend with hot reload at localhost:3000/tasks
 npm run backend
 
 # serve frontend with backend
