@@ -17,4 +17,7 @@ npm run backend
 # serve frontend with backend
 npm run serve
 
+# build for production
+npm run build
+
 ```
