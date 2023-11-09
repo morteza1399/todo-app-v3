@@ -34,9 +34,5 @@
 
 @font-face {
   font-family: "Josefin";
-  src: url('./assets/fonts/static/JosefinSans-Medium.ttf') format('ttf') url('./assets/fonts/static/JosefinSans-Bold.ttf') format('ttf');
-}
-
-tr:hover td>img {
-  display: flex;
+  src: url('@/assets/fonts/static/JosefinSans-Medium.ttf') format('ttf') url('@/assets/fonts/static/JosefinSans-Bold.ttf') format('ttf');
 }

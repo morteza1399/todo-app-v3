@@ -7,33 +7,31 @@
         <tbody>
           <div is="draggable" :list="todoItems" tag="div">
             <tr
-              class="flex justify-between items-center dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
+              class="flex justify-between items-center group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
               v-for="item in todoItems"
               :key="item.id"
             >
               <td class="flex-centered p-4">
                 <div
-                  :class="{
-                    'flex-centered h-6 w-6 mr-2 create-border rounded-[100%] hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none dark:border-gray-300 border-white-200':
-                      item.status != 'completed',
-                    'flex-centered h-6 w-6 bg-gradient-to-br rounded-[100%] from-blue-100 to-purple dark:border-gray-300 border-white-200':
-                      item.status === 'completed',
-                  }"
+                  :class="`${
+                    item.status === 'completed'
+                      ? 'flex-centered h-6 w-6 bg-gradient-to-br rounded-[100%] from-blue-100 to-purple dark:border-gray-300 border-white-200'
+                      : 'flex-centered h-6 w-6 mr-2 create-border rounded-[100%] hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none dark:border-gray-300 border-white-200'
+                  }`"
                 >
                   <div
-                    :class="{
-                      'flex-centered h-5 w-5 rounded-[100%] dark:bg-dark-100 bg-white-400':
-                        item.status != 'completed',
-                      hidden: item.status === 'completed',
-                    }"
+                    :class="`${
+                      item.status === 'completed'
+                        ? 'hidden'
+                        : 'flex-centered h-5 w-5 rounded-[100%] dark:bg-dark-100 bg-white-400'
+                    }`"
                   ></div>
                   <img
-                    :class="{
-                      hidden: item.status != 'completed',
-                      flex: item.status == 'completed',
-                    }"
-                    src="../assets/images/icon-check.svg"
-                    alt=""
+                    :class="`${
+                      item.status === 'completed' ? 'flex' : 'hidden'
+                    }`"
+                    src="@/assets/images/icon-check.svg"
+                    alt="check"
                   />
                 </div>
                 <span
@@ -51,9 +49,9 @@
               </td>
               <td class="flex-centered p-4">
                 <img
-                  class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex"
-                  src="../assets/images/icon-cross.svg"
-                  alt=""
+                  class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex group-hover:flex"
+                  src="@/assets/images/icon-cross.svg"
+                  alt="cross"
                   @click="removeTodoItem(item)"
                 />
               </td>
