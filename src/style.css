@@ -32,7 +32,9 @@
   }
 }
 
-@font-face {
-  font-family: "Josefin";
-  src: url('@/assets/fonts/static/JosefinSans-Medium.ttf') format('ttf') url('@/assets/fonts/static/JosefinSans-Bold.ttf') format('ttf');
+@layer base {
+  @font-face {
+    font-family: "Josefin";
+    src: url('@/assets/fonts/static/JosefinSans-Medium.ttf');
+  }
 }

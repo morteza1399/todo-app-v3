@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   darkMode: "class",
@@ -36,9 +37,6 @@ export default {
       },
       purple: "hsl(280, 87%, 65%)",
     },
-    fontFamily: {
-      josefin: "Josefin",
-    },
     extend: {
       backgroundImage: {
         "desktop-dark": "url('@/assets/images/bg-desktop-dark.jpg')",
@@ -46,7 +44,10 @@ export default {
         "desktop-light": "url('@/assets/images/bg-desktop-light.jpg')",
         "mobile-light": "url('@/assets/images/bg-mobile-light.jpg')",
       },
-      display: ['group-hover']
+      display: ["group-hover"],
+      fontFamily: {
+        josefin: ["Josefin", "Arial", "sans-serif"],
+      },
     },
   },
   plugins: [],

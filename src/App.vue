@@ -13,7 +13,7 @@
       </button>
     </div>
     <div
-      class="flex items-center font-josefin responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-dark-100"
+      class="flex items-center responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-dark-100"
     >
       <div
         class="h-6 w-6 create-border rounded-[100%] ml-4 dark:border-gray-300 border-white-200"
@@ -37,10 +37,10 @@
     />
 
     <div
-      class="flex-centered font-josefin text-gray-100 text-sm py-7 mx-auto h-3/3 xl:w-1/3"
+      class="flex-centered text-gray-100 text-sm py-7 mx-auto h-3/3 xl:w-1/3"
     >
       <p class="xl:mr-6 lg:mr-6 md:mr-6 sm:mr-4 xs:mr-4 xxs:mr-4">
-        Drag and drop to render list
+        Drag and drop to reorder list
       </p>
     </div>
   </div>

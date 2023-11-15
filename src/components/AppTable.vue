@@ -1,11 +1,11 @@
 <template>
   <div>
     <div
-      class="font-josefin h-auto rounded text-lg shadow-lg responsive-width dark:bg-dark-100 dark:text-white-100 bg-white-400 text-blue-300"
+      class="h-auto rounded text-lg shadow-lg responsive-width dark:bg-dark-100 dark:text-white-100 bg-white-400 text-blue-300"
     >
       <table class="w-full h-auto table-auto">
         <tbody>
-          <div is="draggable" :list="todoItems" tag="div">
+          <draggable :list="todoItems">
             <tr
               class="flex justify-between items-center group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
               v-for="item in todoItems"
@@ -56,7 +56,7 @@
                 />
               </td>
             </tr>
-          </div>
+          </draggable>
           <tr
             v-if="hasTasks"
             class="flex-centered create-border-bottom border-solid border-b cursor-pointer border-white-200 dark:border-gray-300"
@@ -104,7 +104,7 @@
       </table>
     </div>
     <div
-      class="flex-centered font-josefin rounded py-4 my-3 responsive-width xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-gray-400"
+      class="flex-centered rounded py-4 my-3 responsive-width xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-gray-400"
     >
       <a
         href="#"
