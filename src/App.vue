@@ -54,7 +54,6 @@ export default {
     return {
       tasks: [],
       task: "",
-      availableStatus: ["to-do", "active", "completed"],
       isDark: true,
     };
   },
@@ -67,7 +66,7 @@ export default {
       this.$store
         .dispatch("postTasks", {
           name: this.task,
-          status: "to-do",
+          isCompleted: false,
         })
         .then((res) => {
           this.tasks.push(res);
@@ -90,9 +89,7 @@ export default {
         });
     },
     updateTask(item) {
-      let newIndex = this.availableStatus.indexOf(item.status);
-      if (++newIndex > 2) newIndex = 0;
-      item.status = this.availableStatus[newIndex];
+      item.isCompleted = !item.isCompleted;
       this.$store.dispatch("updateTasks", {
         id: item.id,
         updatedTask: item,
@@ -100,20 +97,31 @@ export default {
     },
     clearCompleteTask() {
       for (const item of this.tasks) {
-        if (item.status == "completed") {
+        if (item.isCompleted) {
           this.removeTask(item);
         }
       }
     },
     filterTask(property) {
-      if (property === "all") {
-        this.tasks = this.$store.getters.get_tasks;
-      } else {
-        this.tasks = this.$store.getters.get_tasks;
-        let filterdTasks = this.tasks.filter((item) => {
-          return item.status === property;
-        });
-        this.tasks = filterdTasks;
+      switch (property) {
+        case "all":
+          this.tasks = this.$store.getters.get_tasks;
+          break;
+        case "active":
+          this.tasks = this.$store.getters.get_tasks;
+          let active = this.tasks.filter((item) => {
+            return item.isCompleted === false;
+          });
+          this.tasks = active;
+          break;
+        case "completed":
+          this.tasks = this.$store.getters.get_tasks;
+          let completed = this.tasks.filter((item) => {
+            return item.isCompleted === true;
+          });
+          this.tasks = completed;
+        default:
+          break;
       }
     },
     toggleTheme() {

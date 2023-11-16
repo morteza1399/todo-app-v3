@@ -14,22 +14,20 @@
               <td class="flex-centered p-4">
                 <div
                   :class="`${
-                    item.status === 'completed'
+                    item.isCompleted
                       ? 'flex-centered h-6 w-6 bg-gradient-to-br rounded-[100%] from-blue-100 to-purple dark:border-gray-300 border-white-200'
                       : 'flex-centered h-6 w-6 mr-2 create-border rounded-[100%] hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none dark:border-gray-300 border-white-200'
                   }`"
                 >
                   <div
                     :class="`${
-                      item.status === 'completed'
+                      item.isCompleted
                         ? 'hidden'
                         : 'flex-centered h-5 w-5 rounded-[100%] dark:bg-dark-100 bg-white-400'
                     }`"
                   ></div>
                   <img
-                    :class="`${
-                      item.status === 'completed' ? 'flex' : 'hidden'
-                    }`"
+                    :class="`${item.isCompleted ? 'flex' : 'hidden'}`"
                     src="@/assets/images/icon-check.svg"
                     alt="check"
                   />
@@ -39,7 +37,7 @@
                     'select-none font-size',
                     {
                       'ml-2 line-through dark:text-gray-200 text-white-200':
-                        item.status === 'completed',
+                        item.isCompleted,
                     },
                   ]"
                   @click="updateTodoItem(item)"

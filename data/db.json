@@ -1,34 +1,19 @@
 {
   "tasks": [
     {
-      "name": "Complete online JavaScript course",
-      "status": "completed",
+      "name": "first task",
+      "isCompleted": false,
       "id": 1
     },
     {
-      "name": "Jog around the park 3x",
-      "status": "to-do",
+      "name": "second task ",
+      "isCompleted": false,
       "id": 2
     },
     {
-      "name": "10 minutes meditation",
-      "status": "to-do",
+      "name": "third task ",
+      "isCompleted": false,
       "id": 3
-    },
-    {
-      "name": "Read for 1 hour",
-      "status": "to-do",
-      "id": 4
-    },
-    {
-      "name": "Complete Todo App on Frontend Mentor",
-      "status": "to-do",
-      "id": 6
-    },
-    {
-      "name": "new task",
-      "status": "to-do",
-      "id": 7
     }
   ]
 }
