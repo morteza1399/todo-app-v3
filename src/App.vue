@@ -1,14 +1,17 @@
 <template>
   <div
     class="min-h-screen bg-no-repeat bg-top xl:dark:bg-desktop-dark lg:dark:bg-desktop-dark md:dark:bg-desktop-dark sm:dark:bg-desktop-dark xs:dark:bg-mobile-dark xxs:dark:bg-mobile-dark dark:bg-dark-200 xl:bg-desktop-light lg:bg-desktop-light md:bg-desktop-light sm:bg-desktop-light xl:bg-white-400 lg:bg-white-400 md:bg-white-400 sm:bg-white-200 xs:bg-white-200 xxs:bg-white-200 xs:bg-mobile-light xxs:bg-mobile-light"
-    ref="content"
   >
     <div class="flex justify-between items-center pt-24 responsive-width">
       <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">
         TODO
       </h1>
       <button class="flex focus:outline-none" @click="toggleTheme">
-        <img v-if="isDark" src="@/assets/images/icon-sun.svg" alt="sun" />
+        <img
+          v-if="theme === 'dark'"
+          src="@/assets/images/icon-sun.svg"
+          alt="sun"
+        />
         <img v-else src="@/assets/images/icon-moon.svg" alt="moon" />
       </button>
     </div>
@@ -54,8 +57,8 @@ export default {
     return {
       tasks: [],
       task: "",
-      isDark: true,
       spaceRegex: /^\s+$/,
+      theme: localStorage.getItem("theme"),
     };
   },
   components: {
@@ -125,12 +128,13 @@ export default {
       }
     },
     toggleTheme() {
-      const html_element = this.$refs.content.parentElement.parentElement;
-      this.isDark = !this.isDark;
-      if (this.isDark) {
-        html_element.classList.add("dark");
+      document.body.classList.toggle("dark");
+      if (document.body.className.includes("dark")) {
+        localStorage.setItem("theme", "dark");
+        this.theme = localStorage.getItem("theme");
       } else {
-        html_element.classList.remove("dark");
+        localStorage.setItem("theme", "");
+        this.theme = localStorage.getItem("theme");
       }
     },
     fetchTasks() {
@@ -146,6 +150,11 @@ export default {
   },
   created() {
     this.fetchTasks();
+    if (this.theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
   },
 };
 </script>
