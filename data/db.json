@@ -26,14 +26,9 @@
       "id": 6
     },
     {
-      "name": "fix bugs",
-      "status": "active",
-      "id": 7
-    },
-    {
-      "name": "test",
+      "name": "new task",
       "status": "to-do",
-      "id": 8
+      "id": 7
     }
   ]
 }
