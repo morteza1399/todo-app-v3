@@ -55,6 +55,7 @@ export default {
       tasks: [],
       task: "",
       isDark: true,
+      spaceRegex: /^\s+$/,
     };
   },
   components: {
@@ -62,7 +63,7 @@ export default {
   },
   methods: {
     addedTask() {
-      if (this.task.length === 0) return;
+      if (this.task.length === 0 || this.spaceRegex.test(this.task)) return;
       this.$store
         .dispatch("postTasks", {
           name: this.task,
@@ -70,8 +71,6 @@ export default {
         })
         .then((res) => {
           this.tasks.push(res);
-        })
-        .then(() => {
           this.task = "";
         })
         .catch((err) => {
