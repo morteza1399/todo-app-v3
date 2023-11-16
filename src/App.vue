@@ -82,7 +82,8 @@ export default {
       this.$store
         .dispatch("deleteTasks", item.id)
         .then(() => {
-          this.fetchTasks();
+          const index = this.tasks.indexOf(item);
+          this.tasks.splice(index, 1);
         })
         .catch((err) => {
           console.log(err);
