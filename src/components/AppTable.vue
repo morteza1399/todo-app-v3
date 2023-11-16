@@ -13,26 +13,7 @@
               @click="updateTodoItem(item)"
             >
               <td class="flex-centered p-4">
-                <div
-                  :class="`${
-                    item.isCompleted
-                      ? 'flex-centered h-6 w-6 bg-gradient-to-br rounded-[100%] from-blue-100 to-purple dark:border-gray-300 border-white-200'
-                      : 'flex-centered h-6 w-6 mr-2 create-border rounded-[100%] hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none dark:border-gray-300 border-white-200'
-                  }`"
-                >
-                  <div
-                    :class="`${
-                      item.isCompleted
-                        ? 'hidden'
-                        : 'flex-centered h-5 w-5 rounded-[100%] dark:bg-dark-100 bg-white-400'
-                    }`"
-                  ></div>
-                  <img
-                    :class="`${item.isCompleted ? 'flex' : 'hidden'}`"
-                    src="@/assets/images/icon-check.svg"
-                    alt="check"
-                  />
-                </div>
+                <AppCircle :is-completed="item.isCompleted" :has-hover="true"/>
                 <span
                   :class="[
                     'select-none font-size',
@@ -126,10 +107,12 @@
 
 <script>
 import draggable from "vuedraggable";
+import AppCircle from "./AppCircle.vue";
 export default {
   name: "AppTable",
   components: {
     draggable,
+    AppCircle,
   },
   props: {
     todoItems: {

@@ -18,9 +18,7 @@
     <div
       class="flex items-center responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100"
     >
-      <div
-        class="h-6 w-6 create-border rounded-[100%] ml-4 dark:border-gray-300 border-white-200"
-      ></div>
+      <AppCircle />
       <input
         class="w-full h-full rounded ml-2 focus:outline-none font-size dark:bg-dark-100 bg-white-400"
         type="text"
@@ -51,6 +49,7 @@
 
 <script>
 import AppTable from "@/components/AppTable.vue";
+import AppCircle from "./components/AppCircle.vue";
 export default {
   name: "App",
   data() {
@@ -63,6 +62,7 @@ export default {
   },
   components: {
     AppTable,
+    AppCircle,
   },
   methods: {
     addedTask() {
