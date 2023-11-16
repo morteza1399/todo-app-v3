@@ -2,19 +2,7 @@
   <div
     class="min-h-screen bg-no-repeat bg-top xl:dark:bg-desktop-dark lg:dark:bg-desktop-dark md:dark:bg-desktop-dark sm:dark:bg-desktop-dark xs:dark:bg-mobile-dark xxs:dark:bg-mobile-dark dark:bg-dark-200 xl:bg-desktop-light lg:bg-desktop-light md:bg-desktop-light sm:bg-desktop-light xl:bg-white-400 lg:bg-white-400 md:bg-white-400 sm:bg-white-200 xs:bg-white-200 xxs:bg-white-200 xs:bg-mobile-light xxs:bg-mobile-light"
   >
-    <div class="flex justify-between items-center pt-24 responsive-width">
-      <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">
-        TODO
-      </h1>
-      <button class="flex focus:outline-none" @click="toggleTheme">
-        <img
-          v-if="theme === 'dark'"
-          src="@/assets/images/icon-sun.svg"
-          alt="sun"
-        />
-        <img v-else src="@/assets/images/icon-moon.svg" alt="moon" />
-      </button>
-    </div>
+    <AppHeader />
     <div
       class="flex items-center responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100"
     >
@@ -48,8 +36,9 @@
 </template>
 
 <script>
+import AppHeader from "@/components/AppHeader.vue";
 import AppTable from "@/components/AppTable.vue";
-import AppCircle from "./components/AppCircle.vue";
+import AppCircle from "@/components/AppCircle.vue";
 export default {
   name: "App",
   data() {
@@ -57,10 +46,10 @@ export default {
       tasks: [],
       task: "",
       spaceRegex: /^\s+$/,
-      theme: localStorage.getItem("theme"),
     };
   },
   components: {
+    AppHeader,
     AppTable,
     AppCircle,
   },
@@ -127,16 +116,6 @@ export default {
           break;
       }
     },
-    toggleTheme() {
-      document.body.classList.toggle("dark");
-      if (document.body.className.includes("dark")) {
-        localStorage.setItem("theme", "dark");
-        this.theme = localStorage.getItem("theme");
-      } else {
-        localStorage.setItem("theme", "");
-        this.theme = localStorage.getItem("theme");
-      }
-    },
     fetchTasks() {
       this.$store
         .dispatch("getTasks")
@@ -150,11 +129,6 @@ export default {
   },
   created() {
     this.fetchTasks();
-    if (this.theme === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
   },
 };
 </script>

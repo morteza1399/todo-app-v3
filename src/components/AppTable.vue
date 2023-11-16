@@ -13,7 +13,7 @@
               @click="updateTodoItem(item)"
             >
               <td class="flex-centered p-4">
-                <AppCircle :is-completed="item.isCompleted" :has-hover="true"/>
+                <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
                 <span
                   :class="[
                     'select-none font-size',
@@ -37,7 +37,7 @@
             </tr>
           </draggable>
           <tr
-            v-if="hasTasks"
+            v-if="noTask"
             class="flex-centered create-border-bottom border-solid border-b cursor-pointer border-white-200 dark:border-gray-300"
           >
             <td class="flex-centered p-4">NO TASKS</td>
@@ -121,7 +121,7 @@ export default {
     },
   },
   computed: {
-    hasTasks() {
+    noTask() {
       return this.todoItems.length == 0;
     },
     activeTodoItems() {
