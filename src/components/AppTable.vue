@@ -10,6 +10,7 @@
               class="flex justify-between items-center group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
               v-for="item in todoItems"
               :key="item.id"
+              @click="updateTodoItem(item)"
             >
               <td class="flex-centered p-4">
                 <div
@@ -40,7 +41,6 @@
                         item.isCompleted,
                     },
                   ]"
-                  @click="updateTodoItem(item)"
                 >
                   {{ item.name }}
                 </span>
@@ -50,7 +50,7 @@
                   class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex group-hover:flex"
                   src="@/assets/images/icon-cross.svg"
                   alt="cross"
-                  @click="removeTodoItem(item)"
+                  @click.stop="removeTodoItem(item)"
                 />
               </td>
             </tr>
