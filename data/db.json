@@ -2,7 +2,7 @@
   "tasks": [
     {
       "name": "one",
-      "isCompleted": true,
+      "isCompleted": false,
       "id": 1
     },
     {
