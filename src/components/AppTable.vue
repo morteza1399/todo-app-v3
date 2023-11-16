@@ -65,7 +65,7 @@
         <tfoot class="text-sm dark:text-gray-100">
           <tr class="flex justify-between">
             <td
-              class="py-4 ml-6 font-bold dark:hover:text-white-100 text-gray-400 hover:text-blue-300"
+              class="py-4 ml-6 font-bold text-gray-400"
             >
               {{ todoItems.length }} items left
             </td>

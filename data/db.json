@@ -2,7 +2,7 @@
   "tasks": [
     {
       "name": "one",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 1
     },
     {
@@ -12,8 +12,13 @@
     },
     {
       "name": "   three",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 3
+    },
+    {
+      "name": "four",
+      "isCompleted": false,
+      "id": 4
     }
   ]
 }
