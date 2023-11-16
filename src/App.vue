@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-no-repeat xl:dark:bg-desktop-dark lg:dark:bg-desktop-dark md:dark:bg-desktop-dark sm:dark:bg-desktop-dark xs:dark:bg-mobile-dark xxs:dark:bg-mobile-dark dark:bg-dark-200 xl:bg-desktop-light lg:bg-desktop-light md:bg-desktop-light sm:bg-desktop-light xs:bg-mobile-light xxs:bg-mobile-light bg-white-400"
+    class="min-h-screen bg-no-repeat bg-top xl:dark:bg-desktop-dark lg:dark:bg-desktop-dark md:dark:bg-desktop-dark sm:dark:bg-desktop-dark xs:dark:bg-mobile-dark xxs:dark:bg-mobile-dark dark:bg-dark-200 xl:bg-desktop-light lg:bg-desktop-light md:bg-desktop-light sm:bg-desktop-light bg-white-200 xs:bg-mobile-light bg-white-200 xxs:bg-mobile-light"
     ref="content"
   >
     <div class="flex justify-between items-center pt-24 responsive-width">
@@ -13,7 +13,7 @@
       </button>
     </div>
     <div
-      class="flex items-center responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-dark-100"
+      class="flex items-center responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100"
     >
       <div
         class="h-6 w-6 create-border rounded-[100%] ml-4 dark:border-gray-300 border-white-200"
