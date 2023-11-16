@@ -64,10 +64,8 @@
         </tbody>
         <tfoot class="text-sm dark:text-gray-100">
           <tr class="flex justify-between">
-            <td
-              class="py-4 ml-6 font-bold text-gray-400"
-            >
-              {{ todoItems.length }} items left
+            <td class="py-4 ml-6 font-bold text-gray-400">
+              {{ messageItemsLeft }}
             </td>
             <td
               class="py-4 xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden"
@@ -142,6 +140,18 @@ export default {
   computed: {
     hasTasks() {
       return this.todoItems.length == 0;
+    },
+    activeTodoItems() {
+      return this.todoItems.filter((item) => {
+        return item.isCompleted === false;
+      });
+    },
+    messageItemsLeft() {
+      if (this.activeTodoItems.length > 1) {
+        return `${this.activeTodoItems.length} items left`;
+      } else {
+        return `${this.activeTodoItems.length} item left`;
+      }
     },
   },
   methods: {
