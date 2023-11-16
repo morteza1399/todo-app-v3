@@ -73,19 +73,19 @@
               <a
                 href="#"
                 class="dark:filter-link filter-link-light"
-                @click="filterTodoItem('all')"
+                @click.prevent="filterTodoItem('all')"
                 >All</a
               >
               <a
                 href="#"
                 class="dark:filter-link filter-link-light"
-                @click="filterTodoItem('active')"
+                @click.prevent="filterTodoItem('active')"
                 >Active</a
               >
               <a
                 href="#"
                 class="dark:filter-link filter-link-light"
-                @click="filterTodoItem('completed')"
+                @click.prevent="filterTodoItem('completed')"
                 >Complete</a
               >
             </td>
@@ -105,19 +105,19 @@
       <a
         href="#"
         class="dark:filter-link filter-link-light"
-        @click="filterTodoItem('all')"
+        @click.prevent="filterTodoItem('all')"
         >All</a
       >
       <a
         href="#"
         class="dark:filter-link filter-link-light"
-        @click="filterTodoItem('active')"
+        @click.prevent="filterTodoItem('active')"
         >Active</a
       >
       <a
         href="#"
         class="dark:filter-link filter-link-light"
-        @click="filterTodoItem('completed')"
+        @click.prevent="filterTodoItem('completed')"
         >Complete</a
       >
     </div>
