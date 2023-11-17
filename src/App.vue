@@ -55,7 +55,14 @@ export default {
   },
   methods: {
     addedTask() {
-      if (this.task.length === 0 || this.spaceRegex.test(this.task)) return;
+      let names = this.tasks.map((item) => item.name);
+      this.task = this.task.trim();
+      if (
+        this.task.length === 0 ||
+        this.spaceRegex.test(this.task) ||
+        names.includes(this.task)
+      )
+        return;
       this.$store
         .dispatch("postTasks", {
           name: this.task,

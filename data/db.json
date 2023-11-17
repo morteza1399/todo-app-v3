@@ -11,7 +11,7 @@
       "id": 2
     },
     {
-      "name": "   three",
+      "name": "three",
       "isCompleted": false,
       "id": 3
     },
@@ -24,11 +24,6 @@
       "name": "five",
       "isCompleted": false,
       "id": 5
-    },
-    {
-      "name": "six",
-      "isCompleted": false,
-      "id": 6
     }
   ]
 }
