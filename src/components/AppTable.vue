@@ -5,10 +5,10 @@
     >
       <table class="w-full h-auto table-auto">
         <tbody>
-          <draggable :list="todoItems">
+          <draggable :list="$store.getters.tasks">
             <tr
               class="flex justify-between items-center group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
-              v-for="item in todoItems"
+              v-for="item in $store.getters.tasks"
               :key="item.id"
               @click="updateTodoItem(item)"
             >
@@ -53,22 +53,17 @@
             >
               <a
                 href="#"
-                class="dark:filter-link filter-link-light"
-                @click.prevent="filterTodoItem('all')"
-                >All</a
+                :class="`${
+                  currentIndex === index
+                    ? 'dark:filter-link filter-link-light text-blue-200'
+                    : 'dark:filter-link filter-link-light'
+                }`"
+                v-for="(filterItem, index) in this.filterItems"
+                :key="index"
+                @click.prevent="filterTodoItem(filterItem)"
               >
-              <a
-                href="#"
-                class="dark:filter-link filter-link-light"
-                @click.prevent="filterTodoItem('active')"
-                >Active</a
-              >
-              <a
-                href="#"
-                class="dark:filter-link filter-link-light"
-                @click.prevent="filterTodoItem('completed')"
-                >Complete</a
-              >
+                {{ filterItem }}
+              </a>
             </td>
             <td
               class="py-4 mr-6 cursor-pointer font-bold dark:hover:text-white-100 text-gray-400 hover:text-blue-300"
@@ -85,22 +80,17 @@
     >
       <a
         href="#"
-        class="dark:filter-link filter-link-light"
-        @click.prevent="filterTodoItem('all')"
-        >All</a
+        :class="`${
+          currentIndex === index
+            ? 'dark:filter-link filter-link-light text-blue-200'
+            : 'dark:filter-link filter-link-light'
+        }`"
+        v-for="(filterItem, index) in this.filterItems"
+        :key="index"
+        @click.prevent="filterTodoItem(filterItem)"
       >
-      <a
-        href="#"
-        class="dark:filter-link filter-link-light"
-        @click.prevent="filterTodoItem('active')"
-        >Active</a
-      >
-      <a
-        href="#"
-        class="dark:filter-link filter-link-light"
-        @click.prevent="filterTodoItem('completed')"
-        >Complete</a
-      >
+        {{ filterItem }}
+      </a>
     </div>
   </div>
 </template>
@@ -110,22 +100,22 @@ import draggable from "vuedraggable";
 import AppCircle from "./AppCircle.vue";
 export default {
   name: "AppTable",
+  data() {
+    return {
+      filterItems: ["All", "Active", "Complete"],
+      currentIndex: +localStorage.getItem("currentIndex"),
+    };
+  },
   components: {
     draggable,
     AppCircle,
   },
-  props: {
-    todoItems: {
-      type: Array,
-      required: true,
-    },
-  },
   computed: {
     noTask() {
-      return this.todoItems.length == 0;
+      return this.$store.getters.tasks.length === 0;
     },
     activeTodoItems() {
-      return this.todoItems.filter((item) => {
+      return this.$store.getters.tasks.filter((item) => {
         return item.isCompleted === false;
       });
     },
@@ -139,16 +129,36 @@ export default {
   },
   methods: {
     removeTodoItem(item) {
-      this.$emit("remove-item", item);
+      this.$store
+        .dispatch("deleteTasks", item.id)
+        .then(() => {
+          const index = this.$store.getters.tasks.indexOf(item);
+          this.$store.getters.tasks.splice(index, 1);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     updateTodoItem(item) {
-      this.$emit("update-item", item);
+      item.isCompleted = !item.isCompleted;
+      this.$store.dispatch("updateTasks", {
+        id: item.id,
+        updatedTask: item,
+      });
     },
-    filterTodoItem(property) {
-      this.$emit("filter-item", property);
+    filterTodoItem(item) {
+      localStorage.setItem("status", item);
+      this.$store.commit("SET_STATUS", item);
+      let key = this.filterItems.indexOf(item);
+      this.currentIndex = key;
+      localStorage.setItem("currentIndex", this.currentIndex);
     },
     clearCompletedTodoItem() {
-      this.$emit("clear-complete-item");
+      for (const item of this.$store.getters.tasks) {
+        if (item.isCompleted) {
+          this.removeTodoItem(item);
+        }
+      }
     },
   },
 };

@@ -8,17 +8,31 @@ const state = {
   headers: {
     "Content-Type": "application/json;charset=utf-8",
   },
+  status: localStorage.getItem("status"),
 };
 
 const getters = {
-  get_tasks: (state) => {
-    return state.tasks;
+  tasks: (state) => {
+    if (state.status === "Active") {
+      return state.tasks.filter((item) => {
+        return item.isCompleted === false;
+      });
+    } else if (state.status === "Complete") {
+      return state.tasks.filter((item) => {
+        return item.isCompleted === true;
+      });
+    } else {
+      return state.tasks;
+    }
   },
 };
 
 const mutations = {
   SET_TASKS(state, data) {
     state.tasks = data;
+  },
+  SET_STATUS(state, data) {
+    state.status = data;
   },
 };
 

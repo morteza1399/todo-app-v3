@@ -8,11 +8,11 @@
   }
 
   .filter-link {
-    @apply px-2 hover:text-white-100 focus:text-blue-200 cursor-pointer font-bold;
+    @apply px-2 hover:text-white-100 cursor-pointer font-bold;
   }
 
   .filter-link-light {
-    @apply px-2 text-gray-400 hover:text-blue-300 focus:text-blue-200 cursor-pointer font-bold;
+    @apply px-2 text-gray-400 hover:text-blue-300 cursor-pointer font-bold;
   }
 
   .create-border-bottom {

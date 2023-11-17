@@ -17,14 +17,7 @@
         @keyup.enter="addedTask"
       />
     </div>
-    <AppTable
-      :todo-items="tasks"
-      @remove-item="removeTask"
-      @update-item="updateTask"
-      @filter-item="filterTask"
-      @clear-complete-item="clearCompleteTask"
-    />
-
+    <AppTable />
     <div
       class="flex-centered text-gray-100 text-sm py-7 mx-auto h-3/3 xl:w-1/3"
     >
@@ -43,7 +36,6 @@ export default {
   name: "App",
   data() {
     return {
-      tasks: [],
       task: "",
       spaceRegex: /^\s+$/,
     };
@@ -55,12 +47,12 @@ export default {
   },
   methods: {
     addedTask() {
-      let names = this.tasks.map((item) => item.name);
+      let tasks = this.$store.getters.tasks.map((item) => item.name);
       this.task = this.task.trim();
       if (
         this.task.length === 0 ||
         this.spaceRegex.test(this.task) ||
-        names.includes(this.task)
+        tasks.includes(this.task)
       )
         return;
       this.$store
@@ -69,65 +61,18 @@ export default {
           isCompleted: false,
         })
         .then((res) => {
-          this.tasks.push(res);
+          this.$store.getters.tasks.push(res);
           this.task = "";
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    removeTask(item) {
-      this.$store
-        .dispatch("deleteTasks", item.id)
-        .then(() => {
-          const index = this.tasks.indexOf(item);
-          this.tasks.splice(index, 1);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    updateTask(item) {
-      item.isCompleted = !item.isCompleted;
-      this.$store.dispatch("updateTasks", {
-        id: item.id,
-        updatedTask: item,
-      });
-    },
-    clearCompleteTask() {
-      for (const item of this.tasks) {
-        if (item.isCompleted) {
-          this.removeTask(item);
-        }
-      }
-    },
-    filterTask(property) {
-      switch (property) {
-        case "all":
-          this.tasks = this.$store.getters.get_tasks;
-          break;
-        case "active":
-          this.tasks = this.$store.getters.get_tasks;
-          let active = this.tasks.filter((item) => {
-            return item.isCompleted === false;
-          });
-          this.tasks = active;
-          break;
-        case "completed":
-          this.tasks = this.$store.getters.get_tasks;
-          let completed = this.tasks.filter((item) => {
-            return item.isCompleted === true;
-          });
-          this.tasks = completed;
-        default:
-          break;
-      }
-    },
     fetchTasks() {
       this.$store
         .dispatch("getTasks")
-        .then((res) => {
-          this.tasks = res;
+        .then(() => {
+          return this.$store.getters.tasks;
         })
         .catch((err) => {
           console.log(err);
