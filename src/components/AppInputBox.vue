@@ -22,15 +22,15 @@ export default {
   data() {
     return {
       task: "",
-      spaceRegex: /^\s+$/,
+      spaceRegex: /^\s+$/
     };
   },
   components: {
-    AppCircle,
+    AppCircle
   },
   methods: {
     addedTask() {
-      let tasks = this.$store.getters.tasks.map((item) => item.name);
+      let tasks = this.$store.getters.tasks.map(item => item.name);
       this.task = this.task.trim();
       if (
         this.task.length === 0 ||
@@ -41,16 +41,16 @@ export default {
       this.$store
         .dispatch("postTasks", {
           name: this.task,
-          isCompleted: false,
+          isCompleted: false
         })
-        .then((res) => {
-          this.$store.getters.tasks.push(res);
+        .then(res => {
+          this.$store.state.tasks.push(res);
           this.task = "";
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
-  },
+    }
+  }
 };
 </script>
