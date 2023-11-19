@@ -1,5 +1,5 @@
 <template>
-  <draggable :list="all_tasks">
+  <draggable :list="all_tasks" @end="reorderTasks">
     <tr
       class="flex justify-between items-center group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
       v-for="item in all_tasks"
@@ -21,7 +21,7 @@
       </td>
       <td class="flex-centered p-4">
         <img
-          class="filter grayscale group-hover:flex hover:brightness-0 invert"
+          class="filter grayscale group-hover:flex dark:hover:brightness-0 invert hover:brightness-200 saturate-[100%]"
           src="@/assets/images/icon-cross.svg"
           alt="cross"
           @click.stop="deleteTasks(item)"
@@ -48,6 +48,9 @@ export default {
   },
   methods: {
     ...mapActions(useTodoStore, ["updateTasks", "deleteTasks"]),
+    reorderTasks() {
+      localStorage.setItem("all_tasks", JSON.stringify(this.all_tasks));
+    },
   },
 };
 </script>
