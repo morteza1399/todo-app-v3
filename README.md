@@ -1,23 +1,23 @@
-# Vue 2 + Vite + Tailwind
+# Vue 2 + Vite + Tailwind + Pinia
 
-> This application is todo app written with vue2 and vite and tailwind
+> This application is todo app written with vue2 and vite and tailwind and pinia as store
 
 ## Serve And Build Setup
 
 ```bash
 # install dependencies
-npm install
+yarn install
 
 # serve frontend with hot reload at localhost:5173
-npm run dev
+yarn dev
 
 # serve backend with hot reload at localhost:3000/tasks
-npm run backend
+yarn backend
 
 # serve frontend with backend
-npm run serve
+yarn serve
 
 # build for production
-npm run build
+yarn build
 
 ```

@@ -46,8 +46,8 @@ export const useTodoStore = defineStore("todo", {
     },
     async updateTasks(id, updatedTask) {
       try {
-        let response = await axios.put(`/tasks/${id}`, updatedTask);
         updatedTask.isCompleted = !updatedTask.isCompleted;
+        let response = await axios.put(`/tasks/${id}`, updatedTask);
         return Promise.resolve(response.data);
       } catch (error) {
         alert(error.message);
