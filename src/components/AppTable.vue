@@ -28,6 +28,9 @@
 import AppDraggableTableRow from "./appdraggabletablerow.vue";
 import AppTableFooter from "./AppTableFooter.vue";
 import AppFilter from "./AppFilter.vue";
+import { mapState } from "pinia";
+import { useTodoStore } from "../store/index";
+
 export default {
   name: "AppTable",
   components: {
@@ -36,8 +39,9 @@ export default {
     AppFilter,
   },
   computed: {
+    ...mapState(useTodoStore, ["all_tasks"]),
     noTask() {
-      return this.$store.getters.tasks.length === 0;
+      return this.all_tasks.length === 0;
     },
   },
 };

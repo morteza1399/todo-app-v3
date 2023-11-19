@@ -17,14 +17,18 @@
 
 <script>
 import AppFilter from "./AppFilter.vue";
+import { mapState, mapActions } from "pinia";
+import { useTodoStore } from "../store/index";
+
 export default {
   name: "AppTableFooter",
   components: {
     AppFilter,
   },
   computed: {
+    ...mapState(useTodoStore, ["all_tasks"]),
     activeTodoItems() {
-      return this.$store.getters.tasks.filter((item) => {
+      return this.all_tasks.filter((item) => {
         return item.isCompleted === false;
       });
     },
@@ -37,17 +41,11 @@ export default {
     },
   },
   methods: {
+    ...mapActions(useTodoStore, ["deleteTasks"]),
     clearCompletedTodoItem() {
-      for (const item of this.$store.getters.tasks) {
+      for (const item of this.all_tasks) {
         if (item.isCompleted) {
-          this.$store
-            .dispatch("deleteTasks", item)
-            .then(() => {
-              return;
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          this.deleteTasks(item);
         }
       }
     },

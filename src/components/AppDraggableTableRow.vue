@@ -1,10 +1,10 @@
 <template>
-  <draggable :list="$store.getters.tasks">
+  <draggable :list="all_tasks">
     <tr
       class="flex justify-between items-center group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
-      v-for="item in $store.getters.tasks"
+      v-for="item in all_tasks"
       :key="item.id"
-      @click="updateTodoItem(item)"
+      @click="updateTasks(item.id, item)"
     >
       <td class="flex-centered p-4">
         <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
@@ -24,7 +24,7 @@
           class="filter grayscale group-hover:flex hover:brightness-0 invert"
           src="@/assets/images/icon-cross.svg"
           alt="cross"
-          @click.stop="removeTodoItem(item)"
+          @click.stop="deleteTasks(item)"
         />
       </td>
     </tr>
@@ -34,36 +34,20 @@
 <script>
 import draggable from "vuedraggable";
 import AppCircle from "./AppCircle.vue";
+import { mapState, mapActions } from "pinia";
+import { useTodoStore } from "../store/index";
+
 export default {
   name: "AppDraggableTableRow",
   components: {
     draggable,
     AppCircle,
   },
+  computed: {
+    ...mapState(useTodoStore, ["all_tasks"]),
+  },
   methods: {
-    removeTodoItem(item) {
-      this.$store
-        .dispatch("deleteTasks", item)
-        .then(() => {
-          return;
-        })
-        .catch((err) => {
-          console.log(err, "err");
-        });
-    },
-    updateTodoItem(item) {
-      this.$store
-        .dispatch("updateTasks", {
-          id: item.id,
-          updatedTask: item,
-        })
-        .then(() => {
-          item.isCompleted = !item.isCompleted;
-        })
-        .catch((err) => {
-          console.log(err, "err");
-        });
-    },
+    ...mapActions(useTodoStore, ["updateTasks", "deleteTasks"]),
   },
 };
 </script>

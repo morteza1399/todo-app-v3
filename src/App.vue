@@ -14,6 +14,8 @@ import AppHeader from "@/components/AppHeader.vue";
 import AppInputBox from "@/components/AppInputBox.vue";
 import AppTable from "@/components/AppTable.vue";
 import AppReorderList from "@/components/AppReorderList.vue";
+import { mapActions } from "pinia";
+import { useTodoStore } from "./store/index";
 export default {
   name: "App",
   components: {
@@ -22,15 +24,11 @@ export default {
     AppTable,
     AppReorderList,
   },
+  methods: {
+    ...mapActions(useTodoStore, ["getTasks"]),
+  },
   created() {
-    this.$store
-      .dispatch("getTasks")
-      .then(() => {
-        return;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    this.getTasks();
   },
 };
 </script>

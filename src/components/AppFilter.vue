@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useTodoStore } from "../store/index";
 export default {
   name: "AppFilter",
   data() {
@@ -26,9 +28,10 @@ export default {
     };
   },
   methods: {
+    ...mapActions(useTodoStore, ["setStatus"]),
     filterTodoItem(item) {
       localStorage.setItem("status", item);
-      this.$store.commit("SET_STATUS", item);
+      this.setStatus(item);
       let key = this.filterItems.indexOf(item);
       this.currentIndex = key;
       localStorage.setItem("currentIndex", this.currentIndex);

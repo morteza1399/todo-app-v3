@@ -18,6 +18,9 @@
 
 <script>
 import AppCircle from "./AppCircle.vue";
+import { mapState, mapActions } from "pinia";
+import { useTodoStore } from "../store/index";
+
 export default {
   name: "AppInputBox",
   data() {
@@ -29,9 +32,13 @@ export default {
   components: {
     AppCircle,
   },
+  computed: {
+    ...mapState(useTodoStore, ["all_tasks"]),
+  },
   methods: {
+    ...mapActions(useTodoStore, ["postTasks"]),
     addedTask() {
-      let tasks = this.$store.getters.tasks.map((item) => item.name);
+      let tasks = this.all_tasks.map((item) => item.name);
       this.task = this.task.trim();
       if (
         this.task.length === 0 ||
@@ -39,11 +46,10 @@ export default {
         tasks.includes(this.task)
       )
         return;
-      this.$store
-        .dispatch("postTasks", {
-          name: this.task,
-          isCompleted: false,
-        })
+      this.postTasks({
+        name: this.task,
+        isCompleted: false,
+      })
         .then(() => {
           this.task = "";
         })
