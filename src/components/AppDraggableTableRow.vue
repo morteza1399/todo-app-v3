@@ -16,7 +16,8 @@
                 item.isCompleted,
             },
           ]"
-        >{{ item.name }}</span>
+          >{{ item.name }}</span
+        >
       </td>
       <td class="flex-centered p-4">
         <img
@@ -37,27 +38,32 @@ export default {
   name: "AppDraggableTableRow",
   components: {
     draggable,
-    AppCircle
+    AppCircle,
   },
   methods: {
     removeTodoItem(item) {
       this.$store
-        .dispatch("deleteTasks", item.id)
+        .dispatch("deleteTasks", item)
         .then(() => {
-          const index = this.$store.state.tasks.indexOf(item);
-          this.$store.state.tasks.splice(index, 1);
+          return;
         })
-        .catch(err => {
-          console.log(err);
+        .catch((err) => {
+          console.log(err, "err");
         });
     },
     updateTodoItem(item) {
-      item.isCompleted = !item.isCompleted;
-      this.$store.dispatch("updateTasks", {
-        id: item.id,
-        updatedTask: item
-      });
-    }
-  }
+      this.$store
+        .dispatch("updateTasks", {
+          id: item.id,
+          updatedTask: item,
+        })
+        .then(() => {
+          item.isCompleted = !item.isCompleted;
+        })
+        .catch((err) => {
+          console.log(err, "err");
+        });
+    },
+  },
 };
 </script>

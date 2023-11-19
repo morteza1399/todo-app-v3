@@ -1,24 +1,14 @@
 {
   "tasks": [
     {
-      "name": "three",
-      "isCompleted": true,
-      "id": 3
-    },
-    {
       "name": "one",
       "isCompleted": false,
-      "id": 4
+      "id": 1
     },
     {
       "name": "two",
       "isCompleted": false,
-      "id": 5
-    },
-    {
-      "name": "three",
-      "isCompleted": false,
-      "id": 6
+      "id": 2
     }
   ]
 }

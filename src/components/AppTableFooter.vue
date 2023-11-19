@@ -2,13 +2,17 @@
   <tfoot class="text-sm dark:text-gray-100">
     <tr class="flex justify-between">
       <td class="py-4 ml-6 font-bold text-gray-400">{{ messageItemsLeft }}</td>
-      <td class="py-4 xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden">
+      <td
+        class="py-4 xl:block lg:block md:block sm:hidden xs:hidden xxs:hidden"
+      >
         <AppFilter />
       </td>
       <td
         class="py-4 mr-6 cursor-pointer font-bold dark:hover:text-white-100 text-gray-400 hover:text-blue-300"
         @click="clearCompletedTodoItem"
-      >Clear Completed</td>
+      >
+        Clear Completed
+      </td>
     </tr>
   </tfoot>
 </template>
@@ -18,11 +22,11 @@ import AppFilter from "./AppFilter.vue";
 export default {
   name: "AppTableFooter",
   components: {
-    AppFilter
+    AppFilter,
   },
   computed: {
     activeTodoItems() {
-      return this.$store.getters.tasks.filter(item => {
+      return this.$store.getters.tasks.filter((item) => {
         return item.isCompleted === false;
       });
     },
@@ -32,24 +36,23 @@ export default {
       } else {
         return `${this.activeTodoItems.length} item left`;
       }
-    }
+    },
   },
   methods: {
     clearCompletedTodoItem() {
       for (const item of this.$store.getters.tasks) {
         if (item.isCompleted) {
           this.$store
-            .dispatch("deleteTasks", item.id)
+            .dispatch("deleteTasks", item)
             .then(() => {
-              const index = this.$store.state.tasks.indexOf(item);
-              this.$store.state.tasks.splice(index, 1);
+              return;
             })
-            .catch(err => {
+            .catch((err) => {
               console.log(err);
             });
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>

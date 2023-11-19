@@ -1,13 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
 const state = {
   tasks: [],
-  headers: {
-    "Content-Type": "application/json;charset=utf-8",
-  },
   status: localStorage.getItem("status"),
 };
 
@@ -31,6 +29,12 @@ const mutations = {
   SET_TASKS(state, data) {
     state.tasks = data;
   },
+  ADD_TASK(state, data) {
+    state.tasks.push(data);
+  },
+  REMOVE_TASK(state, data) {
+    state.tasks.splice(data, 1);
+  },
   SET_STATUS(state, data) {
     state.status = data;
   },
@@ -38,50 +42,43 @@ const mutations = {
 
 const actions = {
   async getTasks(context) {
-    let response = await fetch("/tasks");
-    let data = await response.json();
-    if (response.status == 200) {
-      context.commit("SET_TASKS", data);
-      return Promise.resolve(data);
-    } else {
-      return Promise.reject(data);
+    try {
+      let response = await axios.get("/tasks");
+      context.commit("SET_TASKS", response.data);
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
     }
   },
   async postTasks(context, tasks) {
-    let response = await fetch("/tasks", {
-      method: "POST",
-      headers: context.state.headers,
-      body: JSON.stringify(tasks),
-    });
-    let data = await response.json();
-    if (response.status == 201) {
-      return Promise.resolve(data);
-    } else {
-      return Promise.reject(data);
+    try {
+      let response = await axios.post("/tasks", tasks, context.state.headers);
+      context.commit("ADD_TASK", response.data);
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
     }
   },
   async updateTasks(context, { id, updatedTask }) {
-    let response = await fetch(`/tasks/${id}`, {
-      method: "PUT",
-      headers: context.state.headers,
-      body: JSON.stringify(updatedTask),
-    });
-    let data = await response.json();
-    if (response.status == 200) {
-      return Promise.resolve(data);
-    } else {
-      return Promise.reject(data);
+    try {
+      let response = await axios.put(
+        `/tasks/${id}`,
+        updatedTask,
+        context.state.headers
+      );
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
     }
   },
-  async deleteTasks(context, id) {
-    let response = await fetch(`/tasks/${id}`, {
-      method: "DELETE",
-    });
-    let data = await response.json();
-    if (response.status == 200) {
-      return Promise.resolve(data);
-    } else {
-      return Promise.reject(data);
+  async deleteTasks(context, item) {
+    try {
+      let response = await axios.delete(`/tasks/${item.id}`);
+      let index = context.state.tasks.indexOf(item);
+      context.commit("REMOVE_TASK", index);
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
     }
   },
 };
