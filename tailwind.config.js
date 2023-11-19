@@ -13,7 +13,7 @@ export default {
       },
       display: ["group-hover"],
       fontFamily: {
-        josefin: ["Josefin", "Arial", "sans-serif"],
+        josefin: ["Josefin", "Arial"],
       },
       screens: {
         sm: { min: "320px", max: "425px" },

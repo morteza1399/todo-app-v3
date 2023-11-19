@@ -4,21 +4,6 @@
       "id": 1,
       "name": "one",
       "isCompleted": false
-    },
-    {
-      "name": "two",
-      "isCompleted": false,
-      "id": 2
-    },
-    {
-      "name": "three",
-      "isCompleted": false,
-      "id": 3
-    },
-    {
-      "name": "four",
-      "isCompleted": true,
-      "id": 4
     }
   ]
 }

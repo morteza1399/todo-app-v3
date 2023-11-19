@@ -34,4 +34,9 @@
     font-family: "Josefin";
     src: url('@/assets/fonts/static/JosefinSans-Medium.ttf');
   }
+
+  @font-face {
+    font-family: "Arial";
+    src: url('@/assets/fonts/Arial/Arial.ttf');
+  }
 }
