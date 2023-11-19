@@ -38,6 +38,7 @@ export default {
   methods: {
     ...mapActions(useTodoStore, ["postTasks"]),
     addedTask() {
+      this.task = this.truncateString(this.task, 30);
       let tasks = this.all_tasks.map((item) => item.name);
       this.task = this.task.trim();
       if (
@@ -56,6 +57,13 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    truncateString(str, num) {
+      if (str.length > num) {
+        return str.slice(0, num) + "...";
+      } else {
+        return str;
+      }
     },
   },
 };
