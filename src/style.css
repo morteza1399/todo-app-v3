@@ -20,17 +20,13 @@
   }
 
   .create-border {
-    @apply border-solid border-2
+    @apply border-solid border-2;
   }
 
   .responsive-width {
-    @apply w-[30rem] min-w-max mx-auto sm:w-10/12 sm:mx-auto
-    /* @apply mx-auto xl:w-1/3 lg:w-2/3 md:w-2/3 sm:w-10/12 xs:w-10/12 xxs:w-11/12; */
+    @apply w-[30rem] min-w-max mx-auto sm:w-10/12 sm:mx-auto;
   }
 
-  /* .font-size {
-    @apply xl:text-xl lg:text-lg md:text-base sm:text-[1rem] xs:text-[1rem] xxs:text-[1rem];
-  } */
 }
 
 @layer base {
