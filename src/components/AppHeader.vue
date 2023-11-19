@@ -1,5 +1,7 @@
 <template>
-  <div class="flex justify-between items-center pt-24 responsive-width">
+  <div
+    class="flex justify-between items-center pt-24 sm:pt-12 responsive-width"
+  >
     <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">TODO</h1>
     <button class="flex focus:outline-none" @click="toggleTheme">
       <img

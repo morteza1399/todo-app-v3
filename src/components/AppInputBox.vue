@@ -1,10 +1,11 @@
 <template>
   <div
-    class="flex items-center responsive-width my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100"
+    class="flex items-center my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100 responsive-width"
   >
     <AppCircle />
     <input
-      class="w-full h-full rounded ml-2 focus:outline-none font-size dark:bg-dark-100 bg-white-400"
+      autocomplete="off"
+      class="w-full h-full rounded ml-2 focus:outline-none dark:bg-dark-100 bg-white-400 caret-blue-200"
       type="text"
       name="new-todo"
       id="new-todo"

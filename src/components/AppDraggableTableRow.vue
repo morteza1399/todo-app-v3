@@ -10,9 +10,9 @@
         <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
         <span
           :class="[
-            'select-none font-size',
+            'select-none',
             {
-              'ml-2 line-through dark:text-gray-200 text-white-200':
+              'ml-2 line-through dark:text-gray-200 text-white-300':
                 item.isCompleted,
             },
           ]"
@@ -21,7 +21,7 @@
       </td>
       <td class="flex-centered p-4">
         <img
-          class="xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex filter grayscale group-hover:flex hover:brightness-0 invert"
+          class="filter grayscale group-hover:flex hover:brightness-0 invert"
           src="@/assets/images/icon-cross.svg"
           alt="cross"
           @click.stop="removeTodoItem(item)"

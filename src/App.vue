@@ -1,6 +1,6 @@
 <template>
   <div
-    class="min-h-screen bg-no-repeat bg-top xl:dark:bg-desktop-dark lg:dark:bg-desktop-dark md:dark:bg-desktop-dark sm:dark:bg-desktop-dark xs:dark:bg-mobile-dark xxs:dark:bg-mobile-dark dark:bg-dark-200 xl:bg-desktop-light lg:bg-desktop-light md:bg-desktop-light sm:bg-desktop-light xl:bg-white-400 lg:bg-white-400 md:bg-white-400 sm:bg-white-200 xs:bg-white-200 xxs:bg-white-200 xs:bg-mobile-light xxs:bg-mobile-light"
+    class="min-h-screen bg-no-repeat bg-top dark:bg-dark-200 bg-white-400 dark:bg-desktop-dark bg-desktop-light sm:dark:bg-mobile-dark sm:bg-mobile-light sm:bg-white-200 sm:min-w-max"
   >
     <AppHeader />
     <AppInputBox />
@@ -22,20 +22,15 @@ export default {
     AppTable,
     AppReorderList,
   },
-  methods: {
-    fetchTasks() {
-      this.$store
-        .dispatch("getTasks")
-        .then(() => {
-          return this.$store.getters.tasks;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
   created() {
-    this.fetchTasks();
+    this.$store
+      .dispatch("getTasks")
+      .then(() => {
+        return;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

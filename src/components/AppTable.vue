@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="h-auto rounded text-lg shadow-lg responsive-width dark:bg-dark-100 dark:text-white-100 bg-white-400 text-blue-300"
+      class="h-auto rounded text-lg shadow-lg dark:bg-dark-100 dark:text-white-100 bg-white-400 text-blue-300 responsive-width"
     >
       <table class="w-full h-auto table-auto">
         <tbody>
@@ -17,7 +17,7 @@
       </table>
     </div>
     <div
-      class="flex-centered rounded py-4 my-3 responsive-width xl:hidden lg:hidden md:hidden sm:flex xs:flex xxs:flex dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-gray-400"
+      class="flex-centered hidden sm:flex rounded py-4 my-3 dark:bg-dark-100 dark:text-gray-100 bg-white-400 text-gray-400 responsive-width"
     >
       <AppFilter />
     </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import AppDraggableTableRow from "./AppDraggableTableRow.vue";
+import AppDraggableTableRow from "./appdraggabletablerow.vue";
 import AppTableFooter from "./AppTableFooter.vue";
 import AppFilter from "./AppFilter.vue";
 export default {
