@@ -10,7 +10,7 @@
         <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
         <span
           :class="[
-            'select-none',
+            'select-none cursor-grab',
             {
               'ml-2 line-through dark:text-gray-200 text-white-300':
                 item.isCompleted,
