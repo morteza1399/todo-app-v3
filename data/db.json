@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "one",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "name": "two",

@@ -26,8 +26,8 @@
   .responsive-width {
     @apply w-[30rem] min-w-max mx-auto sm:w-10/12 sm:mx-auto;
   }
-
 }
+
 
 @layer base {
   @font-face {
