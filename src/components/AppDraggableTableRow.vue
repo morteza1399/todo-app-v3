@@ -16,12 +16,11 @@
                 item.isCompleted,
             },
           ]"
-          >{{ item.name }}</span
-        >
+        >{{ item.name }}</span>
       </td>
       <td class="flex-centered p-4">
         <img
-          class="filter grayscale group-hover:flex dark:hover:brightness-0 invert hover:brightness-200 saturate-[100%]"
+          class="filter grayscale hidden group-hover:flex dark:hover:brightness-0 invert hover:brightness-200 saturate-[100%] sm:flex"
           src="@/assets/images/icon-cross.svg"
           alt="cross"
           @click.stop="deleteTasks(item)"
@@ -41,16 +40,16 @@ export default {
   name: "AppDraggableTableRow",
   components: {
     draggable,
-    AppCircle,
+    AppCircle
   },
   computed: {
-    ...mapState(useTodoStore, ["all_tasks"]),
+    ...mapState(useTodoStore, ["all_tasks"])
   },
   methods: {
     ...mapActions(useTodoStore, ["updateTasks", "deleteTasks"]),
     reorderTasks() {
       localStorage.setItem("all_tasks", JSON.stringify(this.all_tasks));
-    },
-  },
+    }
+  }
 };
 </script>
