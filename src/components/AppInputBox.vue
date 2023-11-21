@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100 responsive-width"
+    class="flex items-center my-6 h-14 rounded dark:bg-dark-100 dark:text-white-200 bg-white-400 text-dark-100"
   >
     <AppCircle />
     <input

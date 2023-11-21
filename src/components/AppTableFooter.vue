@@ -2,7 +2,7 @@
   <tfoot class="text-sm dark:text-gray-100">
     <tr class="flex justify-between">
       <td class="py-4 ml-6 font-bold text-gray-400">{{ messageItemsLeft }}</td>
-      <td class="py-4 flex sm:hidden">
+      <td class="py-4 hidden sm:flex">
         <AppFilter />
       </td>
       <td

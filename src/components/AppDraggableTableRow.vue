@@ -20,7 +20,7 @@
       </td>
       <td class="flex-centered p-4">
         <img
-          class="filter grayscale hidden group-hover:flex dark:hover:brightness-0 invert hover:brightness-200 saturate-[100%] sm:flex"
+          class="filter grayscale flex sm:hidden group-hover:flex dark:hover:brightness-0 invert hover:brightness-200 saturate-[100%]"
           src="@/assets/images/icon-cross.svg"
           alt="cross"
           @click.stop="deleteTasks(item)"

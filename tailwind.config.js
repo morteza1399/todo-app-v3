@@ -11,12 +11,8 @@ export default {
         "desktop-light": "url('@/assets/images/bg-desktop-light.jpg')",
         "mobile-light": "url('@/assets/images/bg-mobile-light.jpg')",
       },
-      display: ["group-hover"],
       fontFamily: {
         josefin: ["Josefin", "Arial"],
-      },
-      screens: {
-        sm: { min: "320px", max: "425px" },
       },
       colors: {
         dark: {

@@ -22,10 +22,6 @@
   .create-border {
     @apply border-solid border-2;
   }
-
-  .responsive-width {
-    @apply w-[30rem] min-w-max mx-auto sm:w-10/12 sm:mx-auto;
-  }
 }
 
 

@@ -1,11 +1,13 @@
 <template>
   <div
-    class="min-h-screen bg-no-repeat bg-top dark:bg-dark-200 bg-white-400 dark:bg-desktop-dark bg-desktop-light sm:dark:bg-mobile-dark sm:bg-mobile-light sm:bg-white-200 sm:min-w-max"
+    class="min-h-screen min-w-max bg-no-repeat bg-top bg-contain sm:bg-auto dark:bg-dark-200 bg-white-200 sm:bg-white-400 sm:dark:bg-desktop-dark sm:bg-desktop-light dark:bg-mobile-dark bg-mobile-light"
   >
-    <AppHeader />
-    <AppInputBox />
-    <AppTable />
-    <AppReorderList />
+    <div class="sm:w-[30rem] sm:mx-auto w-10/12 mx-auto">
+      <AppHeader />
+      <AppInputBox />
+      <AppTable />
+      <AppReorderList />
+    </div>
   </div>
 </template>
 
