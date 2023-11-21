@@ -42,6 +42,9 @@ export const useTodoStore = defineStore("todo", {
       try {
         let response = await axios.post("/tasks", tasks);
         this.tasks.push(response.data);
+        localStorage.getItem("all_tasks") !== null
+          ? localStorage.setItem("all_tasks", JSON.stringify(this.tasks))
+          : "";
         return Promise.resolve(response.data);
       } catch (error) {
         alert(error.message);
@@ -51,6 +54,9 @@ export const useTodoStore = defineStore("todo", {
     async updateTasks(id, updatedTask) {
       try {
         updatedTask.isCompleted = !updatedTask.isCompleted;
+        localStorage.getItem("all_tasks") !== null
+          ? localStorage.setItem("all_tasks", JSON.stringify(this.tasks))
+          : "";
         let response = await axios.put(`/tasks/${id}`, updatedTask);
         return Promise.resolve(response.data);
       } catch (error) {
@@ -63,6 +69,9 @@ export const useTodoStore = defineStore("todo", {
         let response = await axios.delete(`/tasks/${item.id}`);
         let index = this.tasks.indexOf(item);
         this.tasks.splice(index, 1);
+        localStorage.getItem("all_tasks") !== null
+          ? localStorage.setItem("all_tasks", JSON.stringify(this.tasks))
+          : "";
         return Promise.resolve(response.data);
       } catch (error) {
         alert(error.message);
