@@ -27,11 +27,9 @@ export const useTodoStore = defineStore("todo", {
     async getTasks() {
       try {
         let response = await axios.get("/tasks");
-        if (localStorage.getItem("all_tasks") === null) {
-          this.tasks = response.data;
-        } else {
-          this.tasks = JSON.parse(localStorage.getItem("all_tasks"));
-        }
+        localStorage.getItem("all_tasks") === null
+          ? (this.tasks = response.data)
+          : (this.tasks = JSON.parse(localStorage.getItem("all_tasks")));
         return Promise.resolve(response.data);
       } catch (error) {
         alert(error.message);
