@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import AppDraggableTableRow from "./appdraggabletablerow.vue";
+import AppDraggableTableRow from "./AppDraggableTableRow.vue";
 import AppTableFooter from "./AppTableFooter.vue";
 import AppFilter from "./AppFilter.vue";
 import { mapState } from "pinia";
