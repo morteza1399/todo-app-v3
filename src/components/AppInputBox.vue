@@ -38,7 +38,7 @@ export default {
   methods: {
     ...mapActions(useTodoStore, ["postTasks"]),
     addedTask() {
-      this.task = this.truncateString(this.task, 30);
+      this.task = this.truncateString(this.task, 20);
       let tasks = this.all_tasks.map((item) => item.name);
       this.task = this.task.trim();
       if (
