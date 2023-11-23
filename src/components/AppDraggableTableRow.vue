@@ -1,7 +1,7 @@
 <template>
   <draggable :list="all_tasks" @end="reorderTasks">
     <tr
-      class="flex justify-between items-center sm:w-[30rem] w-[20rem] overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
+      class="flex justify-between items-center sm:w-[30rem] w-80 overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
       v-for="item in all_tasks"
       :key="item.id"
       @click="updateTasks(item.id, item)"

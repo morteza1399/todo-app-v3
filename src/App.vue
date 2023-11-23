@@ -2,7 +2,7 @@
   <div
     class="min-h-screen min-w-max bg-no-repeat bg-top bg-contain sm:bg-auto dark:bg-dark-200 bg-white-200 sm:bg-white-400 sm:dark:bg-desktop-dark sm:bg-desktop-light dark:bg-mobile-dark bg-mobile-light"
   >
-    <div class="sm:w-[30rem] sm:mx-auto w-[20rem] mx-auto">
+    <div class="sm:w-[30rem] sm:mx-auto w-80 mx-auto">
       <AppHeader />
       <AppInputBox />
       <AppTable />
