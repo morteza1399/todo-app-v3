@@ -4,15 +4,7 @@
       class="h-auto rounded text-lg shadow-lg dark:bg-dark-100 dark:text-white-100 bg-white-400 text-blue-300"
     >
       <table class="w-full h-auto table-auto">
-        <tbody>
-          <AppDraggableTableRow />
-          <tr
-            v-if="noTask"
-            class="flex-centered create-border-bottom border-solid border-b cursor-pointer border-white-200 dark:border-gray-300"
-          >
-            <td class="flex-centered p-4">NO TASKS</td>
-          </tr>
-        </tbody>
+        <AppTableBody />
         <AppTableFooter />
       </table>
     </div>
@@ -25,24 +17,16 @@
 </template>
 
 <script>
-import AppDraggableTableRow from "./AppDraggableTableRow.vue";
+import AppTableBody from "./AppTableBody.vue";
 import AppTableFooter from "./AppTableFooter.vue";
 import AppFilter from "./AppFilter.vue";
-import { mapState } from "pinia";
-import { useTodoStore } from "../store/index";
 
 export default {
   name: "AppTable",
   components: {
-    AppDraggableTableRow,
+    AppTableBody,
     AppTableFooter,
     AppFilter,
-  },
-  computed: {
-    ...mapState(useTodoStore, ["all_tasks"]),
-    noTask() {
-      return this.all_tasks.length === 0;
-    },
   },
 };
 </script>
