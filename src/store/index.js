@@ -22,6 +22,9 @@ export const useTodoStore = defineStore("todo", {
         return state.tasks;
       }
     },
+    hasTasks() {
+      return this.all_tasks.length > 0;
+    },
   },
   actions: {
     async getTasks() {
@@ -32,7 +35,6 @@ export const useTodoStore = defineStore("todo", {
           : (this.tasks = JSON.parse(localStorage.getItem("all_tasks")));
         return Promise.resolve(response.data);
       } catch (error) {
-        alert(error.message);
         return Promise.reject(error);
       }
     },
@@ -43,15 +45,14 @@ export const useTodoStore = defineStore("todo", {
         this.saveTasksToLocalStorage();
         return Promise.resolve(response.data);
       } catch (error) {
-        alert(error.message);
         return Promise.reject(error);
       }
     },
-    async updateTasks(id, updatedTask) {
+    async updateTasks(updatedTask) {
       try {
         updatedTask.isCompleted = !updatedTask.isCompleted;
         this.saveTasksToLocalStorage();
-        let response = await axios.put(`/tasks/${id}`, updatedTask);
+        let response = await axios.put(`/tasks/${updatedTask.id}`, updatedTask);
         return Promise.resolve(response.data);
       } catch (error) {
         alert(error.message);
@@ -77,6 +78,9 @@ export const useTodoStore = defineStore("todo", {
       localStorage.getItem("all_tasks") !== null
         ? localStorage.setItem("all_tasks", JSON.stringify(this.tasks))
         : "";
+    },
+    reorderTasks() {
+      localStorage.setItem("all_tasks", JSON.stringify(this.all_tasks));
     },
   },
 });

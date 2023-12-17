@@ -5,7 +5,7 @@
         class="flex justify-between items-center sm:w-[30rem] w-80 overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
         v-for="item in all_tasks"
         :key="item.id"
-        @click="updateTasks(item.id, item)"
+        @click="updateTasks(item)"
       >
         <td class="flex-centered p-4">
           <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
@@ -30,7 +30,8 @@
         </td>
       </tr>
     </draggable>
-    <tr v-else
+    <tr
+      v-else
       class="flex-centered create-border-bottom border-solid border-b cursor-pointer border-white-200 dark:border-gray-300"
     >
       <td class="flex-centered p-4">NO TASKS</td>
@@ -51,16 +52,10 @@ export default {
     AppCircle,
   },
   computed: {
-    ...mapState(useTodoStore, ["all_tasks"]),
-    hasTasks() {
-      return this.all_tasks.length > 0;
-    },
+    ...mapState(useTodoStore, ["all_tasks", "hasTasks"]),
   },
   methods: {
-    ...mapActions(useTodoStore, ["updateTasks", "deleteTasks"]),
-    reorderTasks() {
-      localStorage.setItem("all_tasks", JSON.stringify(this.all_tasks));
-    },
+    ...mapActions(useTodoStore, ["updateTasks", "deleteTasks", "reorderTasks"]),
   },
 };
 </script>

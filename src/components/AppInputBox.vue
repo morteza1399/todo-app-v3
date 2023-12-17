@@ -55,7 +55,7 @@ export default {
           this.task = "";
         })
         .catch((err) => {
-          console.log(err);
+          alert(err.message);
         });
     },
     truncateString(str, num) {
