@@ -22,7 +22,7 @@ export const useTodoStore = defineStore("todo", {
         return state.tasks;
       }
     },
-    hasTasks() {
+    has_tasks() {
       return this.all_tasks.length > 0;
     },
   },
