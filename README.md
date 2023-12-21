@@ -1,4 +1,4 @@
-# Vue 2 + Vite + Tailwind + Pinia
+# Vue 3 + Vite + Tailwind + Pinia
 
 > This application is todo app written with vue2 and vite and tailwind and pinia as store
 
