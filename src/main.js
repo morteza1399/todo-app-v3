@@ -1,12 +1,10 @@
-import Vue from "vue";
+import { createApp } from "vue";
+import { createPinia } from "pinia";
 import App from "@/App.vue";
-import { createPinia, PiniaVuePlugin } from "pinia";
 import "@/style.css";
 
-Vue.use(PiniaVuePlugin);
+const app = createApp(App);
 const pinia = createPinia();
 
-new Vue({
-  render: (h) => h(App),
-  pinia,
-}).$mount("#app");
+app.use(pinia);
+app.mount("#app");

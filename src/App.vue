@@ -11,26 +11,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import AppHeader from "@/components/AppHeader.vue";
 import AppInputBox from "@/components/AppInputBox.vue";
 import AppTable from "@/components/AppTable.vue";
 import AppReorderList from "@/components/AppReorderList.vue";
-import { mapActions } from "pinia";
-import { useTodoStore } from "./pinia/todo";
-export default {
-  name: "App",
-  components: {
-    AppHeader,
-    AppInputBox,
-    AppTable,
-    AppReorderList,
-  },
-  methods: {
-    ...mapActions(useTodoStore, ["getTasks"]),
-  },
-  created() {
-    this.getTasks();
-  },
-};
+import { onMounted } from "vue";
+import { useTodoStore } from "@/pinia/todo";
+
+const store = useTodoStore();
+
+onMounted(() => {
+  store.getTasks();
+});
 </script>

@@ -16,17 +16,8 @@
   </div>
 </template>
 
-<script>
-import AppTableBody from "./AppTableBody.vue";
-import AppTableFooter from "./AppTableFooter.vue";
-import AppFilter from "./AppFilter.vue";
-
-export default {
-  name: "AppTable",
-  components: {
-    AppTableBody,
-    AppTableFooter,
-    AppFilter,
-  },
-};
+<script setup>
+import AppTableBody from "@/components/AppTableBody.vue";
+import AppTableFooter from "@/components/AppTableFooter.vue";
+import AppFilter from "@/components/AppFilter.vue";
 </script>

@@ -16,55 +16,38 @@
   </div>
 </template>
 
-<script>
-import AppCircle from "./AppCircle.vue";
-import { mapState, mapActions } from "pinia";
-import { useTodoStore } from "../pinia/todo";
+<script setup>
+import AppCircle from "@/components/AppCircle.vue";
+import { ref, computed } from "vue";
+import { useTodoStore } from "@/pinia/todo";
 
-export default {
-  name: "AppInputBox",
-  data() {
-    return {
-      task: "",
-      spaceRegex: /^\s+$/,
-    };
-  },
-  components: {
-    AppCircle,
-  },
-  computed: {
-    ...mapState(useTodoStore, ["all_tasks"]),
-  },
-  methods: {
-    ...mapActions(useTodoStore, ["postTasks"]),
-    addedTask() {
-      this.task = this.truncateString(this.task, 20);
-      let tasks = this.all_tasks.map((item) => item.name);
-      this.task = this.task.trim();
-      if (
-        this.task.length === 0 ||
-        this.spaceRegex.test(this.task) ||
-        tasks.includes(this.task)
-      )
-        return;
-      this.postTasks({
-        name: this.task,
-        isCompleted: false,
-      })
-        .then(() => {
-          this.task = "";
-        })
-        .catch((err) => {
-          alert(err.message);
-        });
-    },
-    truncateString(str, num) {
-      if (str.length > num) {
-        return str.slice(0, num) + "...";
-      } else {
-        return str;
-      }
-    },
-  },
-};
+const task = ref("");
+const store = useTodoStore();
+
+const all_tasks = computed(() => store.all_tasks.map((item) => item.name));
+
+function addedTask() {
+  task.value = truncateString(task.value, 20);
+  task.value = task.value.trim();
+  if (task.value.length === 0 || all_tasks.value.includes(task.value)) return;
+  store
+    .postTasks({
+      name: task.value,
+      isCompleted: false,
+    })
+    .then(() => {
+      task.value = "";
+    })
+    .catch((err) => {
+      alert(err.message);
+    });
+}
+
+function truncateString(str, num) {
+  if (str.length > num) {
+    return str.slice(0, num) + "...";
+  } else {
+    return str;
+  }
+}
 </script>

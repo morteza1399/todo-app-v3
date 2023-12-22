@@ -11,12 +11,12 @@
     "serve": "npm-run-all --parallel backend dev"
   },
   "dependencies": {
-    "@vitejs/plugin-vue2": "^2.2.0",
+    "@vitejs/plugin-vue": "^4.5.2",
     "axios": "^1.6.2",
     "json-server": "^0.17.4",
     "pinia": "^2.1.7",
-    "vue": "^2.7.14",
-    "vuedraggable": "^2.24.3"
+    "vue": "^3.3.13",
+    "vue-draggable-next": "^2.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
