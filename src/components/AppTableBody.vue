@@ -1,11 +1,15 @@
 <template>
   <tbody>
-    <draggable v-if="has_tasks" :list="all_tasks" @end="store.reorderTasks">
+    <VueDraggableNext
+      v-if="store.has_tasks"
+      :list="store.all_tasks"
+      @end="store.reorderTasks"
+    >
       <tr
         class="flex justify-between items-center sm:w-[30rem] w-80 overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
-        v-for="item in all_tasks"
-        :key="item.id"
+        v-for="item in store.all_tasks"
         @click="store.updateTasks(item)"
+        :key="item.id"
       >
         <td class="flex-centered p-4">
           <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
@@ -29,7 +33,7 @@
           />
         </td>
       </tr>
-    </draggable>
+    </VueDraggableNext>
     <tr
       v-else
       class="flex-centered create-border-bottom border-solid border-b cursor-pointer border-white-200 dark:border-gray-300"
@@ -40,18 +44,9 @@
 </template>
 
 <script setup>
-import { computed, defineComponent } from "vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import { useTodoStore } from "@/pinia/todo";
 import AppCircle from "@/components/AppCircle.vue";
 
 const store = useTodoStore();
-const has_tasks = computed(() => store.has_tasks);
-const all_tasks = computed(() => store.all_tasks);
-
-defineComponent({
-  components: {
-    draggable: VueDraggableNext,
-  },
-});
 </script>

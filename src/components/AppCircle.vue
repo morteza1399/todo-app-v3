@@ -26,18 +26,15 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "AppCircle",
-  props: {
-    isCompleted: {
-      type: Boolean,
-      default: false,
-    },
-    hasHover: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+const props = defineProps({
+  isCompleted: {
+    type: Boolean,
+    default: false,
   },
-};
+  hasHover: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>

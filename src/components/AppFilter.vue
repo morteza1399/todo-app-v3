@@ -7,7 +7,7 @@
           ? 'dark:filter-link filter-link-light text-blue-200'
           : 'dark:filter-link filter-link-light'
       }`"
-      v-for="(filterItem, index) in this.filterItems"
+      v-for="(filterItem, index) in filterItems"
       :key="index"
       @click.prevent="filterTodoItem(filterItem)"
     >
@@ -16,26 +16,19 @@
   </div>
 </template>
 
-<script>
-import { mapActions } from "pinia";
-import { useTodoStore } from "../pinia/todo";
-export default {
-  name: "AppFilter",
-  data() {
-    return {
-      filterItems: ["All", "Active", "Complete"],
-      currentIndex: +localStorage.getItem("currentIndex"),
-    };
-  },
-  methods: {
-    ...mapActions(useTodoStore, ["setStatus"]),
-    filterTodoItem(item) {
-      localStorage.setItem("status", item);
-      this.setStatus(item);
-      let key = this.filterItems.indexOf(item);
-      this.currentIndex = key;
-      localStorage.setItem("currentIndex", this.currentIndex);
-    },
-  },
-};
+<script setup>
+import { ref } from "vue";
+import { useTodoStore } from "@/pinia/todo";
+
+const store = useTodoStore();
+const filterItems = ref(["All", "Active", "Complete"]);
+const currentIndex = ref(+localStorage.getItem("currentIndex"));
+
+function filterTodoItem(item) {
+  localStorage.setItem("status", item);
+  store.setStatus(item);
+  let key = filterItems.value.indexOf(item);
+  currentIndex.value = key;
+  localStorage.setItem("currentIndex", currentIndex.value);
+}
 </script>

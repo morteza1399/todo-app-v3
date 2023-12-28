@@ -1,6 +1,6 @@
 # Vue 3 + Vite + Tailwind + Pinia
 
-> This application is todo app written with vue2 and vite and tailwind and pinia as store
+> This application is todo app written with vue3 and vite and tailwind and pinia as store
 
 ## Serve And Build Setup
 

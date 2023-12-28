@@ -2,12 +2,12 @@
   "tasks": [
     {
       "name": "one",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 1
     },
     {
       "name": "three",
-      "isCompleted": true,
+      "isCompleted": false,
       "id": 2
     },
     {

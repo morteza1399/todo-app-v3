@@ -15,40 +15,30 @@
   </tfoot>
 </template>
 
-<script>
-import AppFilter from "./AppFilter.vue";
-import { mapState, mapActions } from "pinia";
-import { useTodoStore } from "../pinia/todo";
+<script setup>
+import { computed } from "vue";
+import AppFilter from "@/components/AppFilter.vue";
+import { useTodoStore } from "@/pinia/todo";
 
-export default {
-  name: "AppTableFooter",
-  components: {
-    AppFilter,
-  },
-  computed: {
-    ...mapState(useTodoStore, ["all_tasks"]),
-    activeTodoItems() {
-      return this.all_tasks.filter((item) => {
-        return item.isCompleted === false;
-      });
-    },
-    messageItemsLeft() {
-      if (this.activeTodoItems.length > 1) {
-        return `${this.activeTodoItems.length} items left`;
-      } else {
-        return `${this.activeTodoItems.length} item left`;
-      }
-    },
-  },
-  methods: {
-    ...mapActions(useTodoStore, ["deleteTasks"]),
-    clearCompletedTodoItem() {
-      for (const item of this.all_tasks) {
-        if (item.isCompleted) {
-          this.deleteTasks(item);
-        }
-      }
-    },
-  },
-};
+const store = useTodoStore();
+
+const activeTodoItems = computed(() => {
+  return store.all_tasks.filter((item) => item.isCompleted === false);
+});
+
+const messageItemsLeft = computed(() => {
+  if (activeTodoItems.value.length > 1) {
+    return `${activeTodoItems.value.length} items left`;
+  } else {
+    return `${activeTodoItems.value.length} item left`;
+  }
+});
+
+function clearCompletedTodoItem() {
+  for (const item of store.all_tasks) {
+    if (item.isCompleted) {
+      store.deleteTasks(item);
+    }
+  }
+}
 </script>
