@@ -4,52 +4,37 @@ import { ref, computed } from "vue";
 import axios from "axios";
 
 export const useTodoStore = defineStore("todo", () => {
+  // Reactive state
   const todoItems = ref([]);
   const filterStatus = ref(localStorage.getItem("filter-status"));
 
-  const allTodoItems = computed(() => {
-    if (filterStatus.value === "Active") {
-      return todoItems.value.filter((item) => {
-        return item.isCompleted === false;
-      });
-    } else if (filterStatus.value === "Complete") {
-      return todoItems.value.filter((item) => {
-        return item.isCompleted === true;
-      });
-    } else {
-      return todoItems.value;
-    }
-  });
+  // Computed properties
+  const allTodoItems = computed(() => filterTodoItems());
 
   const allTodoItemNames = computed(() =>
     allTodoItems.value.map((item) => item.name)
   );
 
-  const hasTodoItems = computed(() => {
-    return allTodoItems.value.length > 0;
-  });
+  const hasTodoItems = computed(() => allTodoItems.value.length > 0);
 
-  const activeTodoItems = computed(() => {
-    return allTodoItems.value.filter((item) => item.isCompleted === false);
-  });
+  const activeTodoItems = computed(() =>
+    allTodoItems.value.filter((item) => !item.isCompleted)
+  );
 
   const messageItemsLeft = computed(() => {
-    if (activeTodoItems.value.length > 1) {
-      return `${activeTodoItems.value.length} items left`;
-    } else {
-      return `${activeTodoItems.value.length} item left`;
-    }
+    const itemCount = activeTodoItems.value.length;
+    return `${itemCount} item${itemCount > 1 ? "s" : ""} left`;
   });
 
+  // Methods
   async function fetchTodoItem() {
     try {
       let response = await axios.get("/todo-items");
-      localStorage.getItem("all-todo-items") === null
-        ? (todoItems.value = response.data)
-        : (todoItems.value = JSON.parse(
-            localStorage.getItem("all-todo-items")
-          ));
-      return Promise.resolve(response.data);
+      todoItems.value =
+        localStorage.getItem("all-todo-items") === null
+          ? response.data
+          : JSON.parse(localStorage.getItem("all-todo-items"));
+      return response.data;
     } catch (error) {
       return Promise.reject(error);
     }
@@ -60,7 +45,7 @@ export const useTodoStore = defineStore("todo", () => {
       let response = await axios.post("/todo-items", item);
       todoItems.value.push(response.data);
       saveTodoItemToLocalStorage();
-      return Promise.resolve(response.data);
+      return response.data;
     } catch (error) {
       return Promise.reject(error);
     }
@@ -71,7 +56,7 @@ export const useTodoStore = defineStore("todo", () => {
       item.isCompleted = !item.isCompleted;
       saveTodoItemToLocalStorage();
       let response = await axios.put(`/todo-items/${item.id}`, item);
-      return Promise.resolve(response.data);
+      return response.data;
     } catch (error) {
       return Promise.reject(error);
     }
@@ -82,7 +67,7 @@ export const useTodoStore = defineStore("todo", () => {
       let index = todoItems.value.indexOf(item);
       todoItems.value.splice(index, 1);
       saveTodoItemToLocalStorage();
-      return Promise.resolve(response.data);
+      return response.data;
     } catch (error) {
       return Promise.reject(error);
     }
@@ -93,9 +78,7 @@ export const useTodoStore = defineStore("todo", () => {
   }
 
   function saveTodoItemToLocalStorage() {
-    localStorage.getItem("all-todo-items") !== null
-      ? localStorage.setItem("all-todo-items", JSON.stringify(todoItems.value))
-      : "";
+    localStorage.setItem("all-todo-items", JSON.stringify(todoItems.value));
   }
 
   function reorderTodoItem() {
@@ -103,18 +86,29 @@ export const useTodoStore = defineStore("todo", () => {
   }
 
   function truncateString(str, num) {
-    if (str.length > num) {
-      return str.slice(0, num) + "...";
-    } else {
-      return str;
+    return str.length > num ? str.slice(0, num) + "..." : str;
+  }
+
+  // Helper function to filter todo items based on filterStatus
+  function filterTodoItems() {
+    switch (filterStatus.value) {
+      case "Active":
+        return todoItems.value.filter((item) => !item.isCompleted);
+      case "Complete":
+        return todoItems.value.filter((item) => item.isCompleted);
+      default:
+        return todoItems.value;
     }
   }
 
   return {
+    // Exposed properties
     allTodoItems,
     allTodoItemNames,
     hasTodoItems,
     messageItemsLeft,
+
+    // Exposed methods
     fetchTodoItem,
     postTodoItem,
     updateTodoItem,
