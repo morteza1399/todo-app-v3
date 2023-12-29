@@ -11,7 +11,7 @@
       id="new-todo"
       placeholder="Create a new todo..."
       v-model="newTodoItem"
-      @keyup.enter="addedTodoItem"
+      @keyup.enter="addTodoItem"
     />
   </div>
 </template>
@@ -24,14 +24,16 @@ import AppCircle from "@/components/AppCircle.vue";
 const newTodoItem = ref("");
 const store = useTodoStore();
 
-function addedTodoItem() {
-  newTodoItem.value = store.truncateString(newTodoItem.value, 20);
-  newTodoItem.value = newTodoItem.value.trim();
+function addTodoItem() {
+  newTodoItem.value = store.truncateString(newTodoItem.value.trim(), 20);
+
   if (
-    newTodoItem.value.length === 0 ||
+    !newTodoItem.value ||
     store.allTodoItemNames.includes(newTodoItem.value)
-  )
+  ) {
     return;
+  }
+
   store
     .postTodoItem({
       name: newTodoItem.value,
