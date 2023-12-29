@@ -1,24 +1,9 @@
 <template>
   <div>
-    <div
-      :class="`${
-        isCompleted
-          ? 'flex-centered h-6 w-6 bg-gradient-to-br rounded-full from-blue-100 to-purple dark:border-gray-300 border-white-300'
-          : isHover === false
-          ? 'h-6 w-6 create-border rounded-full ml-[0.9rem] dark:border-gray-300 border-white-300'
-          : 'flex-centered h-6 w-6 mr-2 create-border rounded-full hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none dark:border-gray-300 border-white-300'
-      }`"
-    >
-      <div
-        v-if="isHover"
-        :class="`${
-          isCompleted
-            ? 'hidden'
-            : 'flex-centered h-5 w-5 rounded-full dark:bg-dark-100 bg-white-400'
-        }`"
-      ></div>
+    <div :class="containerClasses">
+      <div v-if="isHover" :class="dotClasses"></div>
       <img
-        :class="`${isCompleted ? 'flex' : 'hidden'}`"
+        v-if="isCompleted"
         src="@/assets/images/icon-check.svg"
         alt="check"
       />
@@ -27,6 +12,8 @@
 </template>
 
 <script setup>
+import { defineProps, computed } from "vue";
+
 const props = defineProps({
   isCompleted: {
     type: Boolean,
@@ -36,5 +23,29 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+});
+
+const containerClasses = computed(() => {
+  return [
+    "flex-centered",
+    "h-6",
+    "w-6",
+    "dark:border-gray-300",
+    "border-white-300",
+    props.isCompleted
+      ? "bg-gradient-to-br rounded-full from-blue-100 to-purple"
+      : props.isHover
+      ? "mr-2 create-border rounded-full hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none"
+      : "ml-[0.9rem] create-border rounded-full",
+  ];
+});
+
+const dotClasses = computed(() => {
+  return [
+    "flex-centered",
+    "h-5",
+    "w-5",
+    props.isCompleted ? "hidden" : "rounded-full dark:bg-dark-100 bg-white-400",
+  ];
 });
 </script>
