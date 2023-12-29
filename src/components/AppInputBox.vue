@@ -10,44 +10,38 @@
       name="new-todo"
       id="new-todo"
       placeholder="Create a new todo..."
-      v-model="task"
-      @keyup.enter="addedTask"
+      v-model="newTodoItem"
+      @keyup.enter="addedTodoItem"
     />
   </div>
 </template>
 
 <script setup>
-import AppCircle from "@/components/AppCircle.vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useTodoStore } from "@/pinia/todo";
+import AppCircle from "@/components/AppCircle.vue";
 
-const task = ref("");
+const newTodoItem = ref("");
 const store = useTodoStore();
 
-const all_tasks = computed(() => store.all_tasks.map((item) => item.name));
-
-function addedTask() {
-  task.value = truncateString(task.value, 20);
-  task.value = task.value.trim();
-  if (task.value.length === 0 || all_tasks.value.includes(task.value)) return;
+function addedTodoItem() {
+  newTodoItem.value = store.truncateString(newTodoItem.value, 20);
+  newTodoItem.value = newTodoItem.value.trim();
+  if (
+    newTodoItem.value.length === 0 ||
+    store.allTodoItemNames.includes(newTodoItem.value)
+  )
+    return;
   store
-    .postTasks({
-      name: task.value,
+    .postTodoItem({
+      name: newTodoItem.value,
       isCompleted: false,
     })
     .then(() => {
-      task.value = "";
+      newTodoItem.value = "";
     })
     .catch((err) => {
-      alert(err.message);
+      return err;
     });
-}
-
-function truncateString(str, num) {
-  if (str.length > num) {
-    return str.slice(0, num) + "...";
-  } else {
-    return str;
-  }
 }
 </script>

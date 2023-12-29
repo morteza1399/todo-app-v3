@@ -1,18 +1,18 @@
 <template>
   <tbody>
     <VueDraggableNext
-      v-if="store.has_tasks"
-      :list="store.all_tasks"
-      @end="store.reorderTasks"
+      v-if="store.hasTodoItems"
+      :list="store.allTodoItems"
+      @end="store.reorderTodoItem"
     >
       <tr
         class="flex justify-between items-center sm:w-[30rem] w-80 overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
-        v-for="item in store.all_tasks"
-        @click="store.updateTasks(item)"
+        v-for="item in store.allTodoItems"
+        @click="store.updateTodoItem(item)"
         :key="item.id"
       >
         <td class="flex-centered p-4">
-          <AppCircle :is-completed="item.isCompleted" :has-hover="true" />
+          <AppCircle :is-completed="item.isCompleted" :is-hover="true" />
           <span
             :class="[
               'select-none cursor-grab',
@@ -29,7 +29,7 @@
             class="filter grayscale flex sm:hidden group-hover:flex dark:hover:brightness-0 invert hover:brightness-200 saturate-[100%]"
             src="@/assets/images/icon-cross.svg"
             alt="cross"
-            @click.stop="store.deleteTasks(item)"
+            @click.stop="store.deleteTodoItem(item)"
           />
         </td>
       </tr>
@@ -38,7 +38,7 @@
       v-else
       class="flex-centered create-border-bottom border-solid border-b cursor-pointer border-white-200 dark:border-gray-300"
     >
-      <td class="flex-centered p-4">NO TASKS</td>
+      <td class="flex-centered p-4">NO TODO ITEM</td>
     </tr>
   </tbody>
 </template>

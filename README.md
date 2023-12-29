@@ -11,7 +11,7 @@ yarn install
 # serve frontend with hot reload at localhost:5173
 yarn dev
 
-# serve backend with hot reload at localhost:3000/tasks
+# serve backend with hot reload at localhost:3000/todo-items
 yarn backend
 
 # serve frontend with backend

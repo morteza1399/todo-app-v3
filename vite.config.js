@@ -11,7 +11,7 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/tasks": {
+      "/todo-items": {
         target: "http://localhost:3000",
         secure: false,
       },

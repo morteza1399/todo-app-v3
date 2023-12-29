@@ -22,13 +22,13 @@ import { useTodoStore } from "@/pinia/todo";
 
 const store = useTodoStore();
 const filterItems = ref(["All", "Active", "Complete"]);
-const currentIndex = ref(+localStorage.getItem("currentIndex"));
+const currentIndex = ref(+localStorage.getItem("current-index"));
 
 function filterTodoItem(item) {
-  localStorage.setItem("status", item);
-  store.setStatus(item);
+  localStorage.setItem("filter-status", item);
+  store.setFilterStatus(item);
   let key = filterItems.value.indexOf(item);
   currentIndex.value = key;
-  localStorage.setItem("currentIndex", currentIndex.value);
+  localStorage.setItem("current-index", currentIndex.value);
 }
 </script>

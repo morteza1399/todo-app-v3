@@ -22,6 +22,6 @@ import { useTodoStore } from "@/pinia/todo";
 const store = useTodoStore();
 
 onMounted(() => {
-  store.getTasks();
+  store.fetchTodoItem();
 });
 </script>
