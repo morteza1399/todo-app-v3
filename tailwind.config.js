@@ -5,15 +5,20 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      // Background Images
       backgroundImage: {
         "desktop-dark": "url('@/assets/images/bg-desktop-dark.jpg')",
         "mobile-dark": "url('@/assets/images/bg-mobile-dark.jpg')",
         "desktop-light": "url('@/assets/images/bg-desktop-light.jpg')",
         "mobile-light": "url('@/assets/images/bg-mobile-light.jpg')",
       },
+
+      // Fonts
       fontFamily: {
         josefin: ["Josefin", "Arial"],
       },
+
+      // Colors
       colors: {
         dark: {
           100: "hsl(235, 24%, 19%)",

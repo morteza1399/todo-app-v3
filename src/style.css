@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 @layer components {
+
+  /* Flex Styles */
   .flex-centered {
     @apply flex justify-center items-center;
   }
 
+  /* Filter Link Styles */
   .filter-link {
     @apply px-2 hover:text-white-100 cursor-pointer font-bold;
   }
@@ -15,6 +18,7 @@
     @apply px-2 text-gray-400 hover:text-blue-300 cursor-pointer font-bold;
   }
 
+  /* Border Styles */
   .create-border-bottom {
     @apply border-solid border-b-2 cursor-pointer;
   }
@@ -24,11 +28,14 @@
   }
 }
 
+/* Hide Scrollbar */
 ::-webkit-scrollbar {
   display: none;
 }
 
 @layer base {
+
+  /* Font Faces */
   @font-face {
     font-family: "Josefin";
     src: url('@/assets/fonts/static/JosefinSans-Medium.ttf');
