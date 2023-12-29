@@ -2,33 +2,13 @@
   "todo-items": [
     {
       "name": "one",
-      "isCompleted": true,
+      "isCompleted": false,
       "id": 1
     },
     {
       "name": "two",
       "isCompleted": false,
       "id": 2
-    },
-    {
-      "name": "three",
-      "isCompleted": true,
-      "id": 3
-    },
-    {
-      "name": "ggggggggggggggggssss...",
-      "isCompleted": false,
-      "id": 4
-    },
-    {
-      "name": "asdf",
-      "isCompleted": false,
-      "id": 5
-    },
-    {
-      "name": "ad",
-      "isCompleted": false,
-      "id": 6
     }
   ]
 }

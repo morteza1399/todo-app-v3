@@ -24,10 +24,8 @@ import { useTodoStore } from "@/pinia/todo";
 const store = useTodoStore();
 
 function clearCompletedTodoItem() {
-  for (const item of store.allTodoItems) {
-    if (item.isCompleted) {
-      store.deleteTodoItem(item);
-    }
-  }
+  store.allTodoItems
+    .filter((item) => item.isCompleted)
+    .forEach((completedItem) => store.deleteTodoItem(completedItem));
 }
 </script>

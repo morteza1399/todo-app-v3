@@ -6,10 +6,10 @@
       @end="store.reorderTodoItem"
     >
       <tr
-        class="flex justify-between items-center sm:w-[30rem] w-80 overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
         v-for="item in store.allTodoItems"
-        @click="store.updateTodoItem(item)"
         :key="item.id"
+        class="flex justify-between items-center sm:w-[30rem] w-80 overflow-x-scroll dark:bg-dark-100 bg-white-400 group dark:create-border-bottom dark:border-gray-300 border-solid border-b cursor-pointer border-white-200"
+        @click="store.updateTodoItem(item)"
       >
         <td class="flex-centered p-4">
           <AppCircle :is-completed="item.isCompleted" :is-hover="true" />
