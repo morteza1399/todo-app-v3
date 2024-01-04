@@ -2,36 +2,37 @@
   <div class="flex justify-between items-center pt-16 sm:pt-24">
     <h1 class="font-semibold text-4xl tracking-[0.5em] text-white-200">TODO</h1>
     <button class="flex focus:outline-none" @click="toggleTheme">
-      <img
-        v-if="theme === 'dark'"
-        src="@/assets/images/icon-sun.svg"
-        alt="sun"
-      />
-      <img v-else src="@/assets/images/icon-moon.svg" alt="moon" />
+      <img :src="iconSrc" :alt="iconName" />
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-const theme = ref(localStorage.getItem("theme"));
+import { ref, computed, onMounted } from "vue";
+
+const DARK_THEME_CLASS = "dark";
+const LOCAL_STORAGE_THEME_KEY = "theme";
+const ICON_SUN = "sun";
+const ICON_MOON = "moon";
+
+const currentTheme = ref(localStorage.getItem(LOCAL_STORAGE_THEME_KEY));
+
+const iconSrc = computed(() => `src/assets/images/icon-${iconName.value}.svg`);
+
+const iconName = computed(() =>
+  currentTheme.value === "dark" ? ICON_SUN : ICON_MOON
+);
 
 function toggleTheme() {
-  document.body.classList.toggle("dark");
-  if (document.body.className.includes("dark")) {
-    localStorage.setItem("theme", "dark");
-    theme.value = localStorage.getItem("theme");
-  } else {
-    localStorage.setItem("theme", "");
-    theme.value = localStorage.getItem("theme");
-  }
+  const bodyClassList = document.body.classList;
+  const isDark = bodyClassList.toggle(DARK_THEME_CLASS);
+  currentTheme.value = isDark ? "dark" : "";
+  localStorage.setItem(LOCAL_STORAGE_THEME_KEY, currentTheme.value);
 }
 
 onMounted(() => {
-  if (theme.value === "dark") {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
+  if (currentTheme.value === "dark") {
+    document.body.classList.add(DARK_THEME_CLASS);
   }
 });
 </script>
