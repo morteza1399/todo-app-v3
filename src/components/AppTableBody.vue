@@ -46,7 +46,6 @@
 <script setup>
 import { VueDraggableNext } from "vue-draggable-next";
 import { useTodoStore } from "@/pinia/todo";
-import AppCircle from "@/components/AppCircle.vue";
 
 const store = useTodoStore();
 </script>

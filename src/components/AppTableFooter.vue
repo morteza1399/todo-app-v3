@@ -18,7 +18,6 @@
 </template>
 
 <script setup>
-import AppFilter from "@/components/AppFilter.vue";
 import { useTodoStore } from "@/pinia/todo";
 
 const store = useTodoStore();

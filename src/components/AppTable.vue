@@ -19,5 +19,4 @@
 <script setup>
 import AppTableBody from "@/components/AppTableBody.vue";
 import AppTableFooter from "@/components/AppTableFooter.vue";
-import AppFilter from "@/components/AppFilter.vue";
 </script>

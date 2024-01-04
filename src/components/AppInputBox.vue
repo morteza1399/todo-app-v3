@@ -19,7 +19,6 @@
 <script setup>
 import { ref } from "vue";
 import { useTodoStore } from "@/pinia/todo";
-import AppCircle from "@/components/AppCircle.vue";
 
 const newTodoItem = ref("");
 const store = useTodoStore();
