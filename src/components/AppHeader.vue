@@ -17,10 +17,11 @@ const ICON_MOON = "moon";
 
 const currentTheme = ref(localStorage.getItem(LOCAL_STORAGE_THEME_KEY));
 
+const isDarkTheme = computed(() => currentTheme.value === "dark");
 const iconSrc = computed(() => `src/assets/images/icon-${iconName.value}.svg`);
 
 const iconName = computed(() =>
-  currentTheme.value === "dark" ? ICON_SUN : ICON_MOON
+  isDarkTheme.value ? ICON_SUN : ICON_MOON
 );
 
 function toggleTheme() {
@@ -31,7 +32,7 @@ function toggleTheme() {
 }
 
 onMounted(() => {
-  if (currentTheme.value === "dark") {
+  if (isDarkTheme.value) {
     document.body.classList.add(DARK_THEME_CLASS);
   }
 });
