@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div :class="containerClasses">
-      <div v-if="isHover" :class="dotClasses"></div>
+    <div :class="circleClasses">
+      <div v-if="isHover" :class="hoverClasses"></div>
       <img
         v-if="isCompleted"
         src="@/assets/images/icon-check.svg"
@@ -25,7 +25,7 @@ const props = defineProps({
   },
 });
 
-const containerClasses = computed(() => {
+const circleClasses = computed(() => {
   return [
     "flex-centered",
     "h-6",
@@ -40,7 +40,7 @@ const containerClasses = computed(() => {
   ];
 });
 
-const dotClasses = computed(() => {
+const hoverClasses = computed(() => {
   return [
     "flex-centered",
     "h-5",
