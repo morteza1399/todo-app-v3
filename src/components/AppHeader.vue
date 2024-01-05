@@ -9,31 +9,32 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
+import { ThemeConstants } from "@/utils/constants";
 
-const DARK_THEME_CLASS = "dark";
-const LOCAL_STORAGE_THEME_KEY = "theme";
-const ICON_SUN = "sun";
-const ICON_MOON = "moon";
-
-const currentTheme = ref(localStorage.getItem(LOCAL_STORAGE_THEME_KEY));
+const currentTheme = ref(
+  localStorage.getItem(ThemeConstants.LOCAL_STORAGE_THEME_KEY)
+);
 
 const isDarkTheme = computed(() => currentTheme.value === "dark");
 const iconSrc = computed(() => `src/assets/images/icon-${iconName.value}.svg`);
 
 const iconName = computed(() =>
-  isDarkTheme.value ? ICON_SUN : ICON_MOON
+  isDarkTheme.value ? ThemeConstants.SUN_ICON : ThemeConstants.MOON_ICON
 );
 
 function toggleTheme() {
   const bodyClassList = document.body.classList;
-  const isDark = bodyClassList.toggle(DARK_THEME_CLASS);
+  const isDark = bodyClassList.toggle(ThemeConstants.DARK_THEME_CLASS);
   currentTheme.value = isDark ? "dark" : "";
-  localStorage.setItem(LOCAL_STORAGE_THEME_KEY, currentTheme.value);
+  localStorage.setItem(
+    ThemeConstants.LOCAL_STORAGE_THEME_KEY,
+    currentTheme.value
+  );
 }
 
 onMounted(() => {
   if (isDarkTheme.value) {
-    document.body.classList.add(DARK_THEME_CLASS);
+    document.body.classList.add(ThemeConstants.DARK_THEME_CLASS);
   }
 });
 </script>
