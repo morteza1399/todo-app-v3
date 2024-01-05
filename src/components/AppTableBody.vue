@@ -3,8 +3,8 @@
     <VueDraggableNext
       v-if="store.hasTodoItems"
       :list="store.allTodoItems"
-      @end="store.reorderTodoItem"
-    >
+      @end="store.saveTodoItemToLocalStorage"
+      >
       <tr
         v-for="item in store.allTodoItems"
         :key="item.id"

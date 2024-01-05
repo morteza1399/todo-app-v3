@@ -81,10 +81,6 @@ export const useTodoStore = defineStore("todo", () => {
     localStorage.setItem("all-todo-items", JSON.stringify(todoItems.value));
   }
 
-  function reorderTodoItem() {
-    localStorage.setItem("all-todo-items", JSON.stringify(allTodoItems.value));
-  }
-
   function truncateString(str, num) {
     return str.length > num ? str.slice(0, num) + "..." : str;
   }
@@ -114,7 +110,7 @@ export const useTodoStore = defineStore("todo", () => {
     updateTodoItem,
     deleteTodoItem,
     setFilterStatus,
-    reorderTodoItem,
+    saveTodoItemToLocalStorage,
     truncateString,
   };
 });
