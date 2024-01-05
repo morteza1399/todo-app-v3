@@ -6,9 +6,9 @@ import "@/style.css";
 import {
   setupRequestInterceptor,
   setupResponseInterceptor,
-} from "@/axios-interceptor";
+} from "@/utils/axios-interceptor";
 
-import { registerAppComponents } from "@/register-global-component";
+import { registerAppComponents } from "@/utils/register-global-component";
 
 const app = createApp(App);
 const pinia = createPinia();

@@ -1,14 +1,12 @@
 import axios from "axios";
 
-// Request interceptor
-export const setupRequestInterceptor = () => {
+export function setupRequestInterceptor() {
   axios.interceptors.request.use((config) => {
     return config;
   });
-};
+}
 
-// Response interceptor
-export const setupResponseInterceptor = () => {
+export function setupResponseInterceptor() {
   axios.interceptors.response.use(
     (response) => {
       return response;
@@ -18,4 +16,4 @@ export const setupResponseInterceptor = () => {
       return Promise.reject(error);
     }
   );
-};
+}
