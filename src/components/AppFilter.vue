@@ -18,16 +18,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useTodoStore } from "@/pinia/todo";
+import { FilterConstants } from "@/utils/constants";
 
 const store = useTodoStore();
 const filterItems = ref(["All", "Active", "Complete"]);
-const currentIndex = ref(+localStorage.getItem("current-index"));
+const currentIndex = ref(
+  +localStorage.getItem(FilterConstants.LOCAL_STORAGE_INDEX_KEY)
+);
 
 function filterTodoItem(item, index) {
-  localStorage.setItem("filter-status", item);
+  localStorage.setItem(FilterConstants.LOCAL_STORAGE_FILTER_KEY, item);
   store.setFilterStatus(item);
   currentIndex.value = index;
-  localStorage.setItem("current-index", index);
+  localStorage.setItem(FilterConstants.LOCAL_STORAGE_INDEX_KEY, index);
 }
 
 onMounted(() => {

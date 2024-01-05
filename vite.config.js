@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { BASE_URL } from "./src/utils/constants";
+import { APIConstants } from "./src/utils/constants";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 
@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/todo-items": {
-        target: BASE_URL,
+        target: APIConstants.BASE_URL,
         secure: false,
       },
     },

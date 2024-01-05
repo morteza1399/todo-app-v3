@@ -7,7 +7,7 @@
     },
     {
       "name": "two",
-      "isCompleted": false,
+      "isCompleted": true,
       "id": 2
     }
   ]

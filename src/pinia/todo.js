@@ -1,12 +1,15 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
+import { TodoItemsConstants, FilterConstants } from "@/utils/constants";
 
 import axios from "axios";
 
 export const useTodoStore = defineStore("todo", () => {
   // Reactive state
   const todoItems = ref([]);
-  const filterStatus = ref(localStorage.getItem("filter-status"));
+  const filterStatus = ref(
+    localStorage.getItem(FilterConstants.LOCAL_STORAGE_FILTER_KEY)
+  );
 
   // Computed properties
   const allTodoItems = computed(() => filterTodoItems());
@@ -30,10 +33,13 @@ export const useTodoStore = defineStore("todo", () => {
   async function fetchTodoItem() {
     try {
       let response = await axios.get("/todo-items");
+      const localStorageData = localStorage.getItem(
+        TodoItemsConstants.LOCAL_STORAGE_TODOITEM_KEY
+      );
       todoItems.value =
-        localStorage.getItem("all-todo-items") === null
+        localStorageData === null
           ? response.data
-          : JSON.parse(localStorage.getItem("all-todo-items"));
+          : JSON.parse(localStorageData);
       return response.data;
     } catch (error) {
       return Promise.reject(error);
@@ -78,7 +84,10 @@ export const useTodoStore = defineStore("todo", () => {
   }
 
   function saveTodoItemToLocalStorage() {
-    localStorage.setItem("all-todo-items", JSON.stringify(todoItems.value));
+    localStorage.setItem(
+      TodoItemsConstants.LOCAL_STORAGE_TODOITEM_KEY,
+      JSON.stringify(todoItems.value)
+    );
   }
 
   function truncateString(str, num) {
