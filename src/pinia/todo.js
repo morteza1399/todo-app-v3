@@ -90,11 +90,6 @@ export const useTodoStore = defineStore("todo", () => {
     );
   }
 
-  function truncateString(str, num) {
-    return str.length > num ? str.slice(0, num) + "..." : str;
-  }
-
-  // Helper function to filter todo items based on filterStatus
   function filterTodoItems() {
     switch (filterStatus.value) {
       case "Active":
@@ -120,6 +115,5 @@ export const useTodoStore = defineStore("todo", () => {
     deleteTodoItem,
     setFilterStatus,
     saveTodoItemToLocalStorage,
-    truncateString,
   };
 });

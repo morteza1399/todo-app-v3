@@ -19,12 +19,13 @@
 <script setup>
 import { ref } from "vue";
 import { useTodoStore } from "@/pinia/todo";
+import { truncateString } from "@/utils/Helper";
 
 const newTodoItem = ref("");
 const store = useTodoStore();
 
 function addTodoItem() {
-  newTodoItem.value = store.truncateString(newTodoItem.value.trim(), 20);
+  newTodoItem.value = truncateString(newTodoItem.value.trim(), 20);
 
   if (
     !newTodoItem.value ||
