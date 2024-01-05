@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { ThemeConstants } from "@/utils/constants";
+import { ThemeConstants } from "@/utils/AppConstants";
 
 const currentTheme = ref(
   localStorage.getItem(ThemeConstants.LOCAL_STORAGE_THEME_KEY)

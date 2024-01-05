@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { TodoItemsConstants, FilterConstants } from "@/utils/constants";
+import { TodoItemsConstants, FilterConstants } from "@/utils/AppConstants";
 
 import axios from "axios";
 

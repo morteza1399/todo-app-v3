@@ -18,7 +18,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useTodoStore } from "@/pinia/todo";
-import { FilterConstants } from "@/utils/constants";
+import { FilterConstants } from "@/utils/AppConstants";
 
 const store = useTodoStore();
 const filterItems = ref(["All", "Active", "Complete"]);
