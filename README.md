@@ -1,6 +1,6 @@
-# Vue 3 + Vite + Tailwind + Pinia Todo App
+# Vue 3 + Vite + Tailwind + Typescript + Pinia Todo App
 
-> This application is a todo app written with Vue 3, Vite, Tailwind, and Pinia as the store.
+> This application is a todo app written with Vue 3, Vite, Tailwind, Typescript,  and Pinia as the store.
 
 ## Project Setup
 
