@@ -43,7 +43,7 @@
   </tbody>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { VueDraggableNext } from "vue-draggable-next";
 import { useTodoStore } from "@/pinia/todo";
 

@@ -7,18 +7,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { ThemeConstants } from "@/utils/AppConstants";
 
-const currentTheme = ref(
-  localStorage.getItem(ThemeConstants.LOCAL_STORAGE_THEME_KEY)
+const currentTheme = ref<string>(
+  String(localStorage.getItem(ThemeConstants.LOCAL_STORAGE_THEME_KEY))
 );
 
-const isDarkTheme = computed(() => currentTheme.value === "dark");
-const iconSrc = computed(() => `src/assets/images/icon-${iconName.value}.svg`);
+const isDarkTheme = computed<boolean>(() => currentTheme.value === "dark");
+const iconSrc = computed<string>(
+  () => `src/assets/images/icon-${iconName.value}.svg`
+);
 
-const iconName = computed(() =>
+const iconName = computed<string>(() =>
   isDarkTheme.value ? ThemeConstants.SUN_ICON : ThemeConstants.MOON_ICON
 );
 

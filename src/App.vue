@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppHeader from "@/components/AppHeader.vue";
 import AppInputBox from "@/components/AppInputBox.vue";
 import AppTable from "@/components/AppTable.vue";

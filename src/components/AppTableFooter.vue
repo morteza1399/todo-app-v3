@@ -17,7 +17,7 @@
   </tfoot>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useTodoStore } from "@/pinia/todo";
 
 const store = useTodoStore();

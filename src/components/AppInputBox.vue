@@ -16,12 +16,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
 import { useTodoStore } from "@/pinia/todo";
 import { truncateString } from "@/utils/Helper";
 
-const newTodoItem = ref("");
+const newTodoItem = ref<string>("");
 const store = useTodoStore();
 
 function addTodoItem() {
@@ -36,6 +36,7 @@ function addTodoItem() {
 
   store
     .postTodoItem({
+      id: 0,
       name: newTodoItem.value,
       isCompleted: false,
     })

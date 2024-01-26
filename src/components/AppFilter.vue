@@ -15,22 +15,22 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useTodoStore } from "@/pinia/todo";
 import { FilterConstants } from "@/utils/AppConstants";
 
 const store = useTodoStore();
-const filterItems = ref(["All", "Active", "Complete"]);
-const currentIndex = ref(
-  +localStorage.getItem(FilterConstants.LOCAL_STORAGE_INDEX_KEY)
+const filterItems = ref<string[]>(["All", "Active", "Complete"]);
+const currentIndex = ref<number>(
+  Number(localStorage.getItem(FilterConstants.LOCAL_STORAGE_INDEX_KEY))
 );
 
-function filterTodoItem(item, index) {
+function filterTodoItem(item: string, index: number) {
   localStorage.setItem(FilterConstants.LOCAL_STORAGE_FILTER_KEY, item);
   store.setFilterStatus(item);
   currentIndex.value = index;
-  localStorage.setItem(FilterConstants.LOCAL_STORAGE_INDEX_KEY, index);
+  localStorage.setItem(FilterConstants.LOCAL_STORAGE_INDEX_KEY, `${index}`);
 }
 
 onMounted(() => {

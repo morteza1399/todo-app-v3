@@ -5,26 +5,33 @@ import { TodoItemsConstants, FilterConstants } from "@/utils/AppConstants";
 import axios from "axios";
 
 export const useTodoStore = defineStore("todo", () => {
+
+  interface TodoItem {
+    id: number;
+    name: string;
+    isCompleted: boolean;
+  }
+
   // Reactive state
-  const todoItems = ref([]);
-  const filterStatus = ref(
-    localStorage.getItem(FilterConstants.LOCAL_STORAGE_FILTER_KEY)
+  const todoItems = ref<TodoItem[]>([]);
+  const filterStatus = ref<string>(
+    String(localStorage.getItem(FilterConstants.LOCAL_STORAGE_FILTER_KEY))
   );
 
   // Computed properties
-  const allTodoItems = computed(() => filterTodoItems());
+  const allTodoItems = computed<TodoItem[]>(() => filterTodoItems());
 
-  const allTodoItemNames = computed(() =>
+  const allTodoItemNames = computed<string[]>(() =>
     allTodoItems.value.map((item) => item.name)
   );
 
-  const hasTodoItems = computed(() => allTodoItems.value.length > 0);
+  const hasTodoItems = computed<boolean>(() => allTodoItems.value.length > 0);
 
-  const activeTodoItems = computed(() =>
+  const activeTodoItems = computed<TodoItem[]>(() =>
     allTodoItems.value.filter((item) => !item.isCompleted)
   );
 
-  const messageItemsLeft = computed(() => {
+  const messageItemsLeft = computed<string>(() => {
     const itemCount = activeTodoItems.value.length;
     return `${itemCount} item${itemCount > 1 ? "s" : ""} left`;
   });
@@ -46,7 +53,7 @@ export const useTodoStore = defineStore("todo", () => {
     }
   }
 
-  async function postTodoItem(item) {
+  async function postTodoItem(item: TodoItem) {
     try {
       let response = await axios.post("/todo-items", item);
       todoItems.value.push(response.data);
@@ -57,7 +64,7 @@ export const useTodoStore = defineStore("todo", () => {
     }
   }
 
-  async function updateTodoItem(item) {
+  async function updateTodoItem(item: TodoItem) {
     try {
       item.isCompleted = !item.isCompleted;
       saveTodoItemToLocalStorage();
@@ -67,7 +74,7 @@ export const useTodoStore = defineStore("todo", () => {
       return Promise.reject(error);
     }
   }
-  async function deleteTodoItem(item) {
+  async function deleteTodoItem(item: TodoItem) {
     try {
       let response = await axios.delete(`/todo-items/${item.id}`);
       let index = todoItems.value.indexOf(item);
@@ -79,7 +86,7 @@ export const useTodoStore = defineStore("todo", () => {
     }
   }
 
-  function setFilterStatus(data) {
+  function setFilterStatus(data: string) {
     filterStatus.value = data;
   }
 

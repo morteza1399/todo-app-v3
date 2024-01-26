@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 
 const props = defineProps({
@@ -25,7 +25,7 @@ const props = defineProps({
   },
 });
 
-const circleClasses = computed(() => {
+const circleClasses = computed<string[]>(() => {
   return [
     "flex-centered",
     "h-6",
@@ -40,7 +40,7 @@ const circleClasses = computed(() => {
   ];
 });
 
-const hoverClasses = computed(() => {
+const hoverClasses = computed<string[]>(() => {
   return [
     "flex-centered",
     "h-5",

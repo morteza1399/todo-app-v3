@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AppTableBody from "@/components/AppTableBody.vue";
 import AppTableFooter from "@/components/AppTableFooter.vue";
 </script>
