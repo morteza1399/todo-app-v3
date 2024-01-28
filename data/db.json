@@ -9,11 +9,6 @@
       "name": "two",
       "isCompleted": false,
       "id": 2
-    },
-    {
-      "id": 3,
-      "name": "three",
-      "isCompleted": true
     }
   ]
 }
