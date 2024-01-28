@@ -2,11 +2,7 @@
   <div>
     <div :class="circleClasses">
       <div v-if="isHover" :class="hoverClasses"></div>
-      <img
-        v-if="isCompleted"
-        src="@/assets/images/icon-check.svg"
-        alt="check"
-      />
+      <img v-if="isCompleted" src="@/assets/images/icon-check.svg" alt="check" />
     </div>
   </div>
 </template>
@@ -14,15 +10,14 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps({
-  isCompleted: {
-    type: Boolean,
-    default: false,
-  },
-  isHover: {
-    type: Boolean,
-    default: false,
-  },
+interface Props {
+  isCompleted?: boolean;
+  isHover?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isCompleted: false,
+  isHover: false
 });
 
 const circleClasses = computed<string[]>(() => {
@@ -36,7 +31,7 @@ const circleClasses = computed<string[]>(() => {
       ? "bg-gradient-to-br rounded-full from-blue-100 to-purple"
       : props.isHover
       ? "mr-2 create-border rounded-full hover:bg-gradient-to-br from-blue-100 to-purple hover:border-none"
-      : "ml-[0.9rem] create-border rounded-full",
+      : "ml-[0.9rem] create-border rounded-full"
   ];
 });
 
@@ -45,7 +40,7 @@ const hoverClasses = computed<string[]>(() => {
     "flex-centered",
     "h-5",
     "w-5",
-    props.isCompleted ? "hidden" : "rounded-full dark:bg-dark-100 bg-white-400",
+    props.isCompleted ? "hidden" : "rounded-full dark:bg-dark-100 bg-white-400"
   ];
 });
 </script>
