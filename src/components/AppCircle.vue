@@ -1,8 +1,8 @@
 <template>
   <div>
     <div :class="circleClasses">
-      <div v-if="isHover" :class="hoverClasses"></div>
-      <img v-if="isCompleted" src="@/assets/images/icon-check.svg" alt="check" />
+      <div v-show="isHover" :class="hoverClasses"></div>
+      <img v-show="isCompleted" src="@/assets/images/icon-check.svg" alt="check" />
     </div>
   </div>
 </template>
